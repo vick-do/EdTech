@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+font-family: "Montserrat";
+
+}
+
+.hero-bg {
+
+  background-image: url("./asset/IMG.PNG");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Custom overlay: A dark, semi-transparent layer for text contrast */
+.overlay {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.45
+  ); /* Adjust the 0.45 for more or less darkness */
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #ececec;
+  padding: 32px 0 24px 0;
+  box-sizing: border-box;
+}
+
+.sidebar.dark {
+  background: #181a20;
+  border-right: none;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2b4eff;
+  margin-bottom: 40px;
+  padding-left: 32px;
+}
+
+/* Responsive for mobile or smaller screens */
+@media (max-width: 600px) {
+  .sidebar {
+    width: 60px;
+    padding: 16px 0 12px 0;
+  }
+  .sidebar .logo span,
+  .sidebar li span,
+  .sidebar .logout span {
+    display: none;
+  }
+  .sidebar li,
+  .sidebar .logout {
+    justify-content: center;
+    padding: 12px 0;
+  }
+}

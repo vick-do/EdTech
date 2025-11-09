@@ -1,0 +1,144 @@
+/* Sidebar styles */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: #fff;
+  transition: width 0.3s ease;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+/* Brand styles */
+.brand {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-name {
+  font-weight: 600;
+  color: #1a56db;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .brand-name {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Navigation styles */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0.25rem 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #374151;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #f3f4f6;
+}
+
+.nav-link.active {
+  background-color: #eff6ff;
+  color: #1a56db;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.nav-text {
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Dark theme styles */
+.dark .sidebar {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+.dark .nav-link {
+  color: #d1d5db;
+}
+
+.dark .nav-link:hover {
+  background-color: #1f2937;
+}
+
+.dark .nav-link.active {
+  background-color: #1a56db;
+  color: #fff;
+}
+
+.dark .brand-name {
+  color: #fff;
+}
+
+/* Logout section */
+.logout-section {
+  margin-top: auto;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.dark .logout-section {
+  border-color: #374151;
+}
+
+/* Toggle button */
+.sidebar-toggle {
+  position: absolute;
+  bottom: 1rem;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.dark .sidebar-toggle {
+  background-color: #111827;
+  border-color: #374151;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  transform: rotate(180deg);
+}
