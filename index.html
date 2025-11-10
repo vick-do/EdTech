@@ -141,7 +141,7 @@
       >
         The Ghana EdTech Strategy outlines how technology can strengthen
         teaching, learning, and education systems nationwide. Explore the
-        vision, priorities, and actions driving Ghana’s digital transformation
+        vision, priorities, and actions driving Ghana's digital transformation
         in education.
       </p>
 
@@ -428,89 +428,90 @@
 
 
     <!-- Feedback Section -->
- <section class="bg-gray-50 h-screen flex items-center mb-8 ">
-  <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full ">
+<section class="bg-gray-50 h-screen flex items-center mb-8">
+  <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full">
 
-    <!-- LEFT SIDE: IMAGE -->
-    <div class="flex justify-center items-center h-full">
-      <img 
-        src="./asset/IMG3.png" 
-        alt="Feedback Illustration" 
+    <!-- LEFT SIDE: FEEDBACK FORM -->
+    <div class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1">
+      <!-- Title -->
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center md:text-left">
+        We Value Your Feedback
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-base text-gray-600 mb-10 text-center md:text-left tracking-tight">
+        Help us improve the Ghana EdTech Strategy by sharing your thoughts and experience below.
+      </p>
+
+      <!-- Feedback Form -->
+      <form id="edtech-feedback-form" class="space-y-6 max-w-lg w-full mx-auto md:mx-0">
+        <!-- Feedback Message -->
+        <div>
+          <label
+            for="feedback-message"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Write Feedback
+          </label>
+          <textarea
+            id="feedback-message"
+            name="feedback"
+            rows="4"
+            placeholder="Type your message here..."
+            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Rating Selection -->
+        <div>
+          <label
+            for="feedback-rating"
+            class="block text-sm font-semibold text-gray-700"
+          >
+            Select Rating
+          </label>
+          <select
+            id="feedback-rating"
+            name="rating"
+            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
+            required
+          >
+            <option value="">-- Select satisfaction level --</option>
+            <option value="very_satisfied">Very Satisfied</option>
+            <option value="satisfied">Satisfied</option>
+            <option value="neutral">Neutral</option>
+            <option value="dissatisfied">Dissatisfied</option>
+            <option value="very_dissatisfied">Very Dissatisfied</option>
+          </select>
+        </div>
+
+        <!-- Status Message -->
+        <div id="status-message" class="text-sm font-medium h-5 text-center md:text-left"></div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          id="submit-button"
+          class="w-full py-3 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150 ease-in-out"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+
+    <!-- RIGHT SIDE: IMAGE -->
+    <div class="flex justify-center items-center h-full order-1 md:order-2">
+      <img
+        src="./asset/IMG3.png"
+        alt="Feedback Illustration"
         class="w-full h-full object-cover"
       />
     </div>
 
-    <!-- RIGHT SIDE: FEEDBACK FORM -->
-   <div class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full">
-  <!-- Title -->
-  <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center md:text-left">
-    We Value Your Feedback
-  </h1>
-
-  <!-- Subtitle -->
-  <p class="text-base text-gray-600 mb-10 text-center md:text-left  tracking-tight ">
-    Help us improve the Ghana EdTech Strategy by sharing your thoughts and experience below.
-  </p>
-
-  <!-- Feedback Form -->
-  <form id="edtech-feedback-form" class="space-y-6 max-w-lg w-full mx-auto md:mx-0">
-    <!-- Feedback Message -->
-    <div>
-      <label
-        for="feedback-message"
-        class="block text-sm font-semibold text-gray-700 mb-2"
-      >
-        Write Feedback
-      </label>
-      <textarea
-        id="feedback-message"
-        name="feedback"
-        rows="4"
-        placeholder="Type your message here..."
-        class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none"
-        required
-      ></textarea>
-    </div>
-
-    <!-- Rating Selection -->
-    <div>
-      <label
-        for="feedback-rating"
-        class="block text-sm font-semibold text-gray-700 "
-      >
-        Select Rating
-      </label>
-      <select
-        id="feedback-rating"
-        name="rating"
-        class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
-        required
-      >
-        <option value="">-- Select satisfaction level --</option>
-        <option value="very_satisfied">Very Satisfied</option>
-        <option value="satisfied">Satisfied</option>
-        <option value="neutral">Neutral</option>
-        <option value="dissatisfied">Dissatisfied</option>
-        <option value="very_dissatisfied">Very Dissatisfied</option>
-      </select>
-    </div>
-
-    <!-- Status Message -->
-    <div id="status-message" class="text-sm font-medium h-5 text-center md:text-left"></div>
-
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      id="submit-button"
-      class="w-full py-3 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150 ease-in-out"
-    >
-      Submit
-    </button>
-  </form>
-</div>
-
   </div>
 </section>
+
 
 
     <!-- Footer: full-bleed background with centered, responsive content -->
