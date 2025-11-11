@@ -28,6 +28,20 @@
           0.45
         ); /* Adjust the 0.45 for more or less darkness */
       }
+
+      /* Hide feedback illustration on iPads/tablets only */
+      /* Safari/iPadOS (device-based) */
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .ipad-hidden {
+          display: none !important;
+        }
+      }
+      /* Viewport-based + touch-capable tablets (covers modern iPadOS which may report desktop UA) */
+      @media (min-width: 768px) and (max-width: 1024px) and (hover: none) and (pointer: coarse) {
+        .ipad-hidden {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body
@@ -146,7 +160,7 @@
       <div
         class="relative w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 text-white z-10"
       >
-        <div class="md:w-3/4 lg:w-3/5  transform translate-y-10">
+        <div class="md:w-3/4 lg:w-3/5 transform translate-y-10">
           <h1
             class="text-4xl md:text-6xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg"
           >
@@ -164,7 +178,7 @@
           </p>
 
           <!-- Buttons -->
-          <div class="flex flex-wrap gap-4 ">
+          <div class="flex flex-wrap gap-4">
             <!-- 👇 Now links to the document section on the same page -->
             <a
               href="#document"
@@ -536,122 +550,139 @@
     </section>
 
     <!-- Feedback Section -->
-    <section
-      class="bg-gray-50 h-screen flex items-center mb-8"
-      aria-labelledby="feedback-heading"
+ <section
+  class="bg-gray-50 py-12 md:py-16 flex items-center mb-0"
+  aria-labelledby="feedback-heading"
+>
+  <style>
+    /* Hide image on iPad-sized screens (768px–1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .ipad-hidden {
+        display: none !important;
+      }
+      .ipad-fullwidth {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+
+  <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full ipad-fullwidth">
+    <!-- LEFT SIDE: FEEDBACK FORM -->
+    <div
+      class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1"
     >
-      <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full">
-        <!-- LEFT SIDE: FEEDBACK FORM -->
+      <!-- Title -->
+      <h1
+        id="feedback-heading"
+        class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center md:text-left"
+      >
+        Help Shape Ghana’s EdTech Strategy
+      </h1>
+
+      <!-- Subtitle -->
+      <p
+        class="text-base text-gray-700 mb-8 text-center md:text-left tracking-tight leading-relaxed"
+      >
+        Your perspective matters. Share what’s working, what’s missing, and
+        where we can go further, and inform updates to the Strategy.
+      </p>
+
+      <!-- Info Tags -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-sm">
         <div
-          class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1"
+          class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
         >
-          <!-- Title -->
-          <h1
-            id="feedback-heading"
-            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center md:text-left"
-          >
-            Help Shape Ghana’s EdTech Strategy
-          </h1>
-
-          <!-- Subtitle -->
-          <p
-            class="text-base text-gray-700 mb-6 text-center md:text-left tracking-tight"
-          >
-            Your perspective matters. Share what’s working, what’s missing, and
-            where we can go further, and inform updates to the Strategy.
-          </p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-sm">
-            <div
-              class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
-            >
-              Takes 1–2 minutes
-            </div>
-            <div
-              class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
-            >
-              Anonymous by default
-            </div>
-          </div>
-
-          <!-- Feedback Form -->
-          <form
-            id="edtech-feedback-form"
-            class="space-y-6 max-w-lg w-full mx-auto md:mx-0"
-          >
-            <!-- Feedback Message -->
-            <div>
-              <label
-                for="feedback-message"
-                class="block text-sm font-semibold text-gray-700 mb-2"
-              >
-                Your Feedback
-              </label>
-              <textarea
-                id="feedback-message"
-                name="feedback"
-                rows="4"
-                placeholder="E.g. I like the strategy's vision, but I think it should be more inclusive."
-                class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none"
-                required
-              ></textarea>
-            </div>
-
-            <!-- Rating Selection -->
-            <div>
-              <label
-                for="feedback-rating"
-                class="block text-sm font-semibold text-gray-700"
-              >
-                Overall, how satisfied are you with the Strategy?
-              </label>
-              <select
-                id="feedback-rating"
-                name="rating"
-                class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
-                required
-              >
-                <option value="">-- Select satisfaction level --</option>
-                <option value="very_satisfied">Very Satisfied</option>
-                <option value="satisfied">Satisfied</option>
-                <option value="neutral">Neutral</option>
-                <option value="dissatisfied">Dissatisfied</option>
-                <option value="very_dissatisfied">Very Dissatisfied</option>
-              </select>
-            </div>
-
-            <!-- Status Message -->
-            <div
-              id="status-message"
-              class="text-sm font-medium h-5 text-center md:text-left"
-            ></div>
-
-            <!-- Submit Button -->
-            <button
-              type="submit"
-              id="submit-button"
-              class="w-full py-3 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out"
-            >
-              Send Feedback
-            </button>
-
-            <p class="text-xs text-gray-500 mt-3 text-center md:text-left">
-              We only use this information to improve the public Strategy. No
-              marketing. No spam.
-            </p>
-          </form>
+          Takes 1–2 minutes
         </div>
-
-        <!-- RIGHT SIDE: IMAGE -->
-        <div class="flex justify-center items-center h-full order-1 md:order-2">
-          <img
-            src="./asset/IMG2.jpg"
-            alt="Feedback Illustration"
-            class="w-full h-full"
-          />
+        <div
+          class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+        >
+          Anonymous by default
         </div>
       </div>
-    </section>
+
+      <!-- Feedback Form -->
+      <form
+        id="edtech-feedback-form"
+        class="space-y-6 max-w-lg w-full mx-auto md:mx-0"
+      >
+        <!-- Feedback Message -->
+        <div >
+          <label
+            for="feedback-message"
+            class="block text-sm font-semibold text-gray-700 mb-2"
+          >
+            Your Feedback
+          </label>
+          <textarea
+            id="feedback-message"
+            name="feedback"
+            rows="5"
+            placeholder="E.g. I like the strategy's vision, but I think it should be more inclusive."
+            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none  "
+            required
+          ></textarea>
+        </div>
+
+        <!-- Rating Selection -->
+        <div>
+          <label
+            for="feedback-rating"
+            class="block text-sm font-semibold text-gray-700 mb-2 "
+          >
+            Overall, how satisfied are you with the Strategy?
+          </label>
+          <select
+            id="feedback-rating"
+            name="rating"
+            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
+            required
+          >
+            <option value="">-- Select satisfaction level --</option>
+            <option value="very_satisfied">Very Satisfied</option>
+            <option value="satisfied">Satisfied</option>
+            <option value="neutral">Neutral</option>
+            <option value="dissatisfied">Dissatisfied</option>
+            <option value="very_dissatisfied">Very Dissatisfied</option>
+          </select>
+        </div>
+
+        <!-- Status Message -->
+        <div
+          id="status-message"
+          class="text-sm font-medium h-5 text-center md:text-left"
+        ></div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          id="submit-button"
+          class="w-full py-3.5 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out"
+        >
+          Send Feedback
+        </button>
+
+        <p class="text-xs text-gray-500 mt-4 text-center md:text-left leading-snug">
+          We only use this information to improve the public Strategy.
+        </p>
+      </form>
+    </div>
+
+    <!-- RIGHT SIDE: IMAGE -->
+    <div
+      class="flex justify-center items-center h-full order-1 md:order-2 ipad-hidden"
+    >
+      <img
+        src="./asset/IMG2.jpg"
+        alt="Feedback Illustration"
+        class="w-full h-full object-cover md:object-center"
+      />
+    </div>
+  </div>
+</section>
+
+
+
 
     <!-- Footer: full-bleed background with centered, responsive content -->
     <footer
