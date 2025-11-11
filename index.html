@@ -8,7 +8,6 @@
 
     <style>
       .hero-bg {
-        
         background-image: url("./asset/IMG.PNG");
         background-size: cover;
         background-position: center;
@@ -31,495 +30,648 @@
       }
     </style>
   </head>
-  <body class="font-sans bg-gray-100 min-h-screen w-full overflow-x-hidden m-0 p-0">
-    
-   <!-- ===== NAVBAR ===== -->
-<nav
-  id="navbar"
-  class="fixed top-0 w-full z-50 bg-transparent text-white shadow-lg transition-all duration-300 border-b border-white"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    
-    <!-- Logo Section -->
-    <div class="flex items-center space-x-2">
-      <a href="#home" class="text-lg font-semibold">Ghana EdTech</a>
-      <span class="hidden sm:inline text-sm text-gray-300">Strategy</span>
-    </div>
-
-    <!-- Desktop Menu -->
-    <div class="hidden md:flex items-center space-x-8">
-      <a
-        href="#home"
-        class="nav-link text-base font-medium border-b-2 border-orange-500 text-orange-400 pb-1 hover:text-orange-400 transition duration-150"
-      >Home</a>
-      <a
-        href="#overview"
-        class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
-      >Overview</a>
-      <a
-        href="#document"
-        class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
-      >Document</a>
-      <a
-        href="#chatbot"
-        class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
-      >Chatbot</a>
-      <a
-        href="#contact"
-        class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
-      >Contact</a>
-    </div>
-
-    <!-- Mobile Menu Button -->
-    <button id="menu-btn" class="md:hidden flex flex-col space-y-1 focus:outline-none">
-      <span class="block w-6 h-0.5 bg-white"></span>
-      <span class="block w-6 h-0.5 bg-white"></span>
-      <span class="block w-6 h-0.5 bg-white"></span>
-    </button>
-  </div>
-
-  <!-- Mobile Dropdown Menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden bg-gray-900 bg-opacity-95 text-white flex flex-col space-y-4 py-6 px-6 transition-all duration-300"
+  <body
+    class="font-sans bg-gray-100 min-h-screen w-full overflow-x-hidden m-0 p-0"
   >
-    <a href="#home" class="text-base font-medium hover:text-orange-400">Home</a>
-    <a href="#overview" class="text-base font-medium hover:text-orange-400">Overview</a>
-    <a href="#document" class="text-base font-medium hover:text-orange-400">Document</a>
-    <a href="#chatbot" class="text-base font-medium hover:text-orange-400">Chatbot</a>
-    <a href="#contact" class="text-base font-medium hover:text-orange-400">Contact</a>
-  </div>
-</nav>
+    <!-- ===== NAVBAR ===== -->
+    <nav
+      id="navbar"
+      class="fixed top-0 w-full z-50 bg-transparent text-white shadow-lg transition-all duration-300 border-b border-white"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+      >
+        <!-- Logo Section -->
+        <div class="flex items-center space-x-2">
+          <a href="#home" class="text-lg font-semibold">Ghana EdTech</a>
+          <span class="hidden sm:inline text-sm text-gray-300">Strategy</span>
+        </div>
 
-<!-- ===== SMOOTH SCROLL SCRIPT ===== -->
-<script>
-  const menuBtn = document.getElementById("menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a
+            href="#home"
+            class="nav-link text-base font-medium border-b-2 border-orange-500 text-orange-400 pb-1 hover:text-orange-400 transition duration-150"
+            >Home</a
+          >
+          <a
+            href="#overview"
+            class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
+            >Overview</a
+          >
+          <a
+            href="#document"
+            class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
+            >Document</a
+          >
+          <a
+            href="#chatbot"
+            class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
+            >Chatbot</a
+          >
+          <a
+            href="#contact"
+            class="nav-link text-base font-medium hover:text-orange-400 transition duration-150 border-b-2 border-transparent hover:border-orange-500"
+            >Contact</a
+          >
+        </div>
 
-  // Toggle mobile menu
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
+        <!-- Mobile Menu Button -->
+        <button
+          id="menu-btn"
+          class="md:hidden flex flex-col space-y-1 focus:outline-none"
+        >
+          <span class="block w-6 h-0.5 bg-white"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+        </button>
+      </div>
 
-  // Smooth scroll for all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-        mobileMenu.classList.add("hidden"); // close mobile menu after click
-      }
-    });
-  });
-</script>
+      <!-- Mobile Dropdown Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-gray-900 bg-opacity-95 text-white flex flex-col space-y-4 py-6 px-6 transition-all duration-300"
+      >
+        <a href="#home" class="text-base font-medium hover:text-orange-400"
+          >Home</a
+        >
+        <a href="#overview" class="text-base font-medium hover:text-orange-400"
+          >Overview</a
+        >
+        <a href="#document" class="text-base font-medium hover:text-orange-400"
+          >Document</a
+        >
+        <a href="#chatbot" class="text-base font-medium hover:text-orange-400"
+          >Chatbot</a
+        >
+        <a href="#contact" class="text-base font-medium hover:text-orange-400"
+          >Contact</a
+        >
+      </div>
+    </nav>
 
+    <!-- ===== SMOOTH SCROLL SCRIPT ===== -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      // Toggle mobile menu
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Smooth scroll for all anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+            mobileMenu.classList.add("hidden"); // close mobile menu after click
+          }
+        });
+      });
+    </script>
 
     <!-- ===== HERO SECTION ===== -->
-<div
-  id="home"
-  class="hero-bg relative h-screen flex items-center justify-start w-screen bg-cover bg-center"
-  style="background-image: url('./asset/IMG.PNG');"
->
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-
-  <!-- Content -->
-  <div
-    class="relative w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 text-white z-10"
-  >
-    <div class="md:w-3/4 lg:w-3/5 ml-auto transform translate-y-10 translate-x-6">
-      <h1
-        class="text-4xl md:text-6xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg"
-      >
-        Advancing Education Through <br class="hidden sm:block" />
-        Technology in Ghana
-      </h1>
-
-      <p
-        class="text-lg md:text-xl font-light mb-10 max-w-xl text-gray-200 leading-relaxed"
-      >
-        The Ghana EdTech Strategy outlines how technology can strengthen
-        teaching, learning, and education systems nationwide. Explore the
-        vision, priorities, and actions driving Ghana's digital transformation
-        in education.
-      </p>
-
-      <!-- Buttons -->
-      <div class="flex flex-wrap gap-4">
-        <!-- 👇 Now links to the document section on the same page -->
-        <a
-          href="#document"
-          class="bg-orange-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-orange-800 transition duration-300"
-        >
-          Access Document
-        </a>
-        <a
-          href="#overview"
-          class="bg-transparent border-2 border-white text-white font-semibold py-2 px-12 rounded-full shadow-lg hover:bg-white hover:text-black transition duration-300"
-        >
-          Learn More
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    
-
- <!-- Strategy Overview Section -->
- <section
-  id="overview"
-  class="bg-white py-5 md:py-20 flex flex-col justify-center"
-  aria-labelledby="strategy-heading"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2
-      id="strategy-heading"
-      class="text-center text-2xl md:text-3xl font-bold text-black mb-4"
+    <div
+      id="home"
+      class="hero-bg relative h-screen flex items-center justify-center w-screen bg-cover bg-center"
+      style="background-image: url('./asset/IMG9.png')"
     >
-      Strategy Overview
-    </h2>
-    <p
-      class="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-14"
-    >
-      Technology has the power to transform education for every learner in Ghana.
-      The EdTech Strategy brings together partners and policymakers to ensure that
-      digital solutions support teaching, inclusion, and lifelong learning
-      nationwide.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Card 1 -->
-      <article
-        class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
-      >
-        <div
-          class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
-        >
-          <!-- governance icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-7 h-7 text-black"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="1.8"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 2l9 4.5-9 4.5L3 6.5 12 2zM3 10l9 4.5L21 10M3 14l9 4.5L21 14"
-            />
-          </svg>
-        </div>
-        <h3 class="text-black text-base font-semibold mb-2">
-          Governance, Management &amp; Accountability
-        </h3>
-        <p class="text-gray-600 text-sm leading-relaxed">
-          Enhancing leadership, coordination, and data-driven management through
-          transparent systems to ensure effective governance and impact.
-        </p>
-      </article>
-
-      <!-- Card 2 -->
-      <article
-        class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
-      >
-        <div
-          class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
-        >
-          <!-- connectivity icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-7 h-7 text-black"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="1.8"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 18a3 3 0 100-6 3 3 0 000 6zM2.05 10.05a10 10 0 0119.9 0M5.64 13.64a5 5 0 0112.72 0"
-            />
-          </svg>
-        </div>
-        <h3 class="text-black text-base font-semibold mb-2">
-          Infrastructure, Connectivity &amp; Capacity Building
-        </h3>
-        <p class="text-gray-600 text-sm leading-relaxed">
-          Improving digital infrastructure, connectivity, and teacher capacity for
-          effective ICT integration in education.
-        </p>
-      </article>
-
-      <!-- Card 3 (Cybersecurity) -->
-      <article
-        class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
-      >
-        <div
-          class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
-        >
-          <!-- cybersecurity icon (new) -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-black" viewBox="0 0 32 32">
-            <path
-              fill="currentColor"
-              d="M14 16.59L11.41 14L10 15.41l4 4l8-8L20.59 10L14 16.59z"
-            />
-            <path
-              fill="currentColor"
-              d="m16 30l-6.176-3.293A10.982 10.982 0 0 1 4 17V4a2.002 2.002 0 0 1 2-2h20a2.002 2.002 0 0 1 2 2v13a10.982 10.982 0 0 1-5.824 9.707ZM6 4v13a8.985 8.985 0 0 0 4.766 7.942L16 27.733l5.234-2.79A8.985 8.985 0 0 0 26 17V4Z"
-            />
-          </svg>
-        </div>
-        <h3 class="text-black text-base font-semibold mb-2">
-          Cybersecurity &amp; Data Protection
-        </h3>
-        <p class="text-black text-sm leading-relaxed">
-          Ensuring a safe and secure digital learning environment by protecting
-          learner data, safeguarding systems, and promoting responsible technology
-          use.
-        </p>
-      </article>
-
-      <!-- Card 4 (Innovation) -->
-      <article
-        class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
-      >
-        <div
-          class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
-        >
-          <!-- innovation icon (new) -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-black" viewBox="0 0 24 24">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 21h6M12 3a6 6 0 0 0-5.019 9.29c.954 1.452 1.43 2.178 1.493 2.286c.55.965.449.625.518 1.734c.008.124.008.313.008.69a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1c0-.377 0-.566.008-.69c.07-1.11-.033-.769.518-1.734c.062-.108.54-.834 1.493-2.287A6 6 0 0 0 12 3Z"
-            />
-          </svg>
-        </div>
-        <h3 class="text-black text-base font-semibold mb-2">
-          Innovation, Sustainability &amp; Inclusion
-        </h3>
-        <p class="text-black text-sm leading-relaxed">
-          Advancing inclusive, innovative, and sustainable digital learning systems
-          for equitable education and lasting impact.
-        </p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-
- <!-- Documentation Section -->
-<section id="document" class="min-h-screen flex flex-col justify-center py-8 px-4 sm:px-6 lg:px-8 bg-[#f9fafc]">
-  <div class="max-w-5xl w-full mx-auto">
-    <!-- Header -->
-    <div class="text-center mb-5">
-      <h1 class="text-3xl font-extrabold text-black mb-3">Read the Strategy Document</h1>
-      <p class="text-gray-600 mb-2">Access the complete EdTech Strategy Document</p>
-
-      <!-- Lock Notice -->
-      <div class="border border-[#f5c16c] text-[#b46900] bg-[#fff8e1] px-5 py-2 text-sm font-medium inline-flex items-center justify-center">
-        <span class="mr-2 text-lg">🔒</span>
-        Document access for stakeholders only — downloading disabled
-      </div>
-    </div>
-
-    <!-- Main Content Box -->
-    <div class="bg-white border-8 border-gray-200 p-8 sm:p-10">
-      <!-- Top Bar with Icons -->
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-semibold text-black">Ghana National EdTech Strategy</h2>
-        <div class="flex space-x-4 text-gray-400">
-          <button class="hover:text-indigo-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.817A6 6 0 012 8z" clip-rule="evenodd"/>
-            </svg>
-          </button>
-          <button class="hover:text-indigo-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
 
       <!-- Content -->
-      <div class="text-gray-700 leading-relaxed space-y-6">
-        <div>
-          <h3 class="text-lg font-bold text-black mb-1">Executive Summary</h3>
-          <p class="tracking-tight ">
-            The Ghana EdTech Strategy leverages digital technologies to provide inclusive, equitable, and high-quality education.
-            Through 14 strategic priorities — including governance, infrastructure, curriculum integration, capacity building,
-            cybersecurity, and innovation — it aims to create a future-ready, resilient, and accessible education system for all learners.
-          </p>
-        </div>
+      <div
+        class="relative w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 text-white z-10"
+      >
+        <div class="md:w-3/4 lg:w-3/5  transform translate-y-10">
+          <h1
+            class="text-4xl md:text-6xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg"
+          >
+            Advancing Education Through <br class="hidden sm:block" />
+            Technology in Ghana
+          </h1>
 
-        <div>
-          <h3 class="text-lg font-bold text-black mb-1">Vision Statement</h3>
-          <p>
-            A digitally inclusive and resilient education system in Ghana that enhances learning, teaching, and management through
-            accessible, relevant, and sustainable EdTech solutions.
+          <p
+            class="text-lg md:text-xl font-light mb-10 max-w-xl text-gray-200 leading-relaxed"
+          >
+            The Ghana EdTech Strategy outlines how technology can strengthen
+            teaching, learning, and education systems nationwide. Explore the
+            vision, priorities, and actions driving Ghana's digital
+            transformation in education.
           </p>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap gap-4 ">
+            <!-- 👇 Now links to the document section on the same page -->
+            <a
+              href="#document"
+              class="bg-orange-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-orange-800 transition duration-300"
+            >
+              Access Document
+            </a>
+            <a
+              href="#overview"
+              class="bg-transparent border-2 border-white text-white font-semibold py-2 px-12 rounded-full shadow-lg hover:bg-white hover:text-black transition duration-300"
+            >
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
-
-      <!-- Linked Button -->
-      <a href="/document.html" class="mt-8 bg-orange-500 hover:bg-orange-600 border border-[#d4e0ff] py-3 px-4 flex justify-center items-center text-white text-sm font-medium rounded-md transition-all duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M8 2a2 2 0 00-2 2v12a2 2 0 002 2h4a2 2 0 002-2V8l-4-4H8z" />
-        </svg>
-        Click here for the Full document
-      </a>
     </div>
-  </div>
-</section>
 
+    <!-- Strategy Overview Section -->
+    <section
+      id="overview"
+      class="bg-white py-5 md:py-20 flex flex-col justify-center"
+      aria-labelledby="strategy-heading"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2
+          id="strategy-heading"
+          class="text-center text-2xl md:text-3xl font-bold text-black mb-4"
+        >
+          Strategy Overview
+        </h2>
+        <p
+          class="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-14"
+        >
+          Technology has the power to transform education for every learner in
+          Ghana. The EdTech Strategy brings together partners and policymakers
+          to ensure that digital solutions support teaching, inclusion, and
+          lifelong learning nationwide.
+        </p>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <article
+            class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
+          >
+            <div
+              class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
+            >
+              <!-- governance icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-7 h-7 text-black"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 2l9 4.5-9 4.5L3 6.5 12 2zM3 10l9 4.5L21 10M3 14l9 4.5L21 14"
+                />
+              </svg>
+            </div>
+            <h3 class="text-black text-base font-semibold mb-2">
+              Governance, Management &amp; Accountability
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Enhancing leadership, coordination, and data-driven management
+              through transparent systems to ensure effective governance and
+              impact.
+            </p>
+          </article>
 
+          <!-- Card 2 -->
+          <article
+            class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
+          >
+            <div
+              class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
+            >
+              <!-- connectivity icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-7 h-7 text-black"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 18a3 3 0 100-6 3 3 0 000 6zM2.05 10.05a10 10 0 0119.9 0M5.64 13.64a5 5 0 0112.72 0"
+                />
+              </svg>
+            </div>
+            <h3 class="text-black text-base font-semibold mb-2">
+              Infrastructure, Connectivity &amp; Capacity Building
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Improving digital infrastructure, connectivity, and teacher
+              capacity for effective ICT integration in education.
+            </p>
+          </article>
+
+          <!-- Card 3 (Cybersecurity) -->
+          <article
+            class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
+          >
+            <div
+              class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
+            >
+              <!-- cybersecurity icon (new) -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-7 h-7 text-black"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  fill="currentColor"
+                  d="M14 16.59L11.41 14L10 15.41l4 4l8-8L20.59 10L14 16.59z"
+                />
+                <path
+                  fill="currentColor"
+                  d="m16 30l-6.176-3.293A10.982 10.982 0 0 1 4 17V4a2.002 2.002 0 0 1 2-2h20a2.002 2.002 0 0 1 2 2v13a10.982 10.982 0 0 1-5.824 9.707ZM6 4v13a8.985 8.985 0 0 0 4.766 7.942L16 27.733l5.234-2.79A8.985 8.985 0 0 0 26 17V4Z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-black text-base font-semibold mb-2">
+              Cybersecurity &amp; Data Protection
+            </h3>
+            <p class="text-black text-sm leading-relaxed">
+              Ensuring a safe and secure digital learning environment by
+              protecting learner data, safeguarding systems, and promoting
+              responsible technology use.
+            </p>
+          </article>
+
+          <!-- Card 4 (Innovation) -->
+          <article
+            class="bg-white rounded-xl p-6 shadow-lg hover:-translate-y-1.5 transition-all duration-200 hover:shadow-xl"
+          >
+            <div
+              class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4"
+            >
+              <!-- innovation icon (new) -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-7 h-7 text-black"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 21h6M12 3a6 6 0 0 0-5.019 9.29c.954 1.452 1.43 2.178 1.493 2.286c.55.965.449.625.518 1.734c.008.124.008.313.008.69a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1c0-.377 0-.566.008-.69c.07-1.11-.033-.769.518-1.734c.062-.108.54-.834 1.493-2.287A6 6 0 0 0 12 3Z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-black text-base font-semibold mb-2">
+              Innovation, Sustainability &amp; Inclusion
+            </h3>
+            <p class="text-black text-sm leading-relaxed">
+              Advancing inclusive, innovative, and sustainable digital learning
+              systems for equitable education and lasting impact.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section
+      id="document"
+      class="min-h-screen flex flex-col justify-center py-8 px-4 sm:px-6 lg:px-8 bg-[#f9fafc]"
+    >
+      <div class="max-w-5xl w-full mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-5">
+          <h1 class="text-3xl font-extrabold text-black mb-3">
+            Read the Strategy Document
+          </h1>
+          <p class="text-gray-600 mb-2">
+            Access the complete EdTech Strategy Document
+          </p>
+
+          <!-- Lock Notice -->
+          <div
+            class="border border-[#f5c16c] text-[#b46900] bg-[#fff8e1] px-5 py-2 text-sm font-medium inline-flex items-center justify-center"
+          >
+            <span class="mr-2 text-lg">🔒</span>
+            Document access for stakeholders only — downloading disabled
+          </div>
+        </div>
+
+        <!-- Main Content Box -->
+        <div class="bg-white border-8 border-gray-200 p-8 sm:p-10">
+          <!-- Top Bar with Icons -->
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold text-black">
+              Ghana National EdTech Strategy
+            </h2>
+            <div class="flex space-x-4 text-gray-400">
+              <button class="hover:text-indigo-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.817A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <button class="hover:text-indigo-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="text-gray-700 leading-relaxed space-y-6">
+            <div>
+              <h3 class="text-lg font-bold text-black mb-1">
+                Executive Summary
+              </h3>
+              <p class="tracking-tight">
+                The Ghana EdTech Strategy leverages digital technologies to
+                provide inclusive, equitable, and high-quality education.
+                Through 14 strategic priorities — including governance,
+                infrastructure, curriculum integration, capacity building,
+                cybersecurity, and innovation — it aims to create a
+                future-ready, resilient, and accessible education system for all
+                learners.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-bold text-black mb-1">
+                Vision Statement
+              </h3>
+              <p>
+                A digitally inclusive and resilient education system in Ghana
+                that enhances learning, teaching, and management through
+                accessible, relevant, and sustainable EdTech solutions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Linked Button -->
+          <a
+            href="/document.html"
+            class="mt-8 bg-orange-500 hover:bg-orange-600 border border-[#d4e0ff] py-3 px-4 flex justify-center items-center text-white text-sm font-medium rounded-md transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                d="M8 2a2 2 0 00-2 2v12a2 2 0 002 2h4a2 2 0 002-2V8l-4-4H8z"
+              />
+            </svg>
+            Click here for the Full document
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- Chatbot Section -->
- <section
-  id="chatbot"
-  class="flex flex-col items-center justify-center min-h-screen space-y-6 px-4 bg-white"
->
-  <!-- Chatbot Icon -->
-  <div class="flex justify-center mb-2">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 2048 2048"
-      class="w-16 h-16 text-black"
-      fill="currentColor"
+    <section
+      id="chatbot"
+      class="relative min-h-screen flex items-center justify-center px-4 py-16 bg-center bg-cover"
+      style="background-image: url('./asset/chatbot.png')"
+      aria-labelledby="chatbot-heading"
     >
-      <path
-        d="M768 1024H640V896h128v128zm512 0h-128V896h128v128zm512-128v256h-128v320q0 40-15 75t-41 61t-61 41t-75 15h-264l-440 376v-376H448q-40 0-75-15t-61-41t-41-61t-15-75v-320H128V896h128V704q0-40 15-75t41-61t61-41t75-15h448V303q-29-17-46-47t-18-64q0-27 10-50t27-40t41-28t50-10q27 0 50 10t40 27t28 41t10 50q0 34-17 64t-47 47v209h448q40 0 75 15t61 41t41 61t15 75v192h128zm-256-192q0-26-19-45t-45-19H448q-26 0-45 19t-19 45v768q0 26 19 45t45 19h448v226l264-226h312q26 0 45-19t19-45V704zm-851 462q55 55 126 84t149 30q78 0 149-29t126-85l90 91q-73 73-167 112t-198 39q-103 0-197-39t-168-112l90-91z"
-      />
-    </svg>
-  </div>
+      <!-- Overlay for contrast on image -->
+      <div class="absolute inset-0 bg-black/60"></div>
 
-  <!-- Title -->
-  <h2 class="text-2xl sm:text-3xl font-bold text-black text-center">
-    Engage with Our Strategy Chat Bot
-  </h2>
+      <!-- Glass card -->
+      <div class="relative z-10 w-full max-w-4xl mx-auto">
+        <div
+          class="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl p-8 sm:p-10 shadow-2xl"
+        >
+          <!-- Header -->
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 2048 2048"
+              class="w-10 h-10 text-white"
+              fill="currentColor"
+              role="img"
+              aria-hidden="true"
+            >
+              <path
+                d="M768 1024H640V896h128v128zm512 0h-128V896h128v128zm512-128v256h-128v320q0 40-15 75t-41 61t-61 41t-75 15h-264l-440 376v-376H448q-40 0-75-15t-61-41t-41-61t-15-75v-320H128V896h128V704q0-40 15-75t41-61t61-41t75-15h448V303q-29-17-46-47t-18-64q0-27 10-50t27-40t41-28t50-10q27 0 50 10t40 27t28 41t10 50q0 34-17 64t-47 47v209h448q40 0 75 15t61 41t41 61t15 75v192h128zm-256-192q0-26-19-45t-45-19H448q-26 0-45 19t-19 45v768q0 26 19 45t45 19h448v226l264-226h312q26 0 45-19t19-45V704zm-851 462q55 55 126 84t149 30q78 0 149-29t126-85l90 91q-73 73-167 112t-198 39q-103 0-197-39t-168-112l90-91z"
+              />
+            </svg>
+            <h2
+              id="chatbot-heading"
+              class="text-2xl sm:text-3xl font-bold text-white text-center"
+            >
+              Welcome to EdTech Strategy Bot
+            </h2>
+          </div>
 
-  <!-- Description (now wraps on small screens) -->
-  <p class="text-gray-600 text-center">
-    Ask questions, share feedback, or explore specific aspects of the EdTech Strategy.
-  </p>
+          <p class="text-center text-gray-200 max-w-2xl mx-auto">
+            Discover the vision, priorities, and real-world actions behind
+            Ghana’s EdTech Strategy. Choose a quick prompt or start a
+            conversation.
+          </p>
 
-  <!-- Button -->
-  <button
-    id="openChat"
-    class="mt-6 px-14 py-3 bg-white rounded-full border border-gray-300 shadow-md hover:shadow-lg transition-all text-sm font-semibold text-gray-800 focus:outline-none"
-    onclick="window.open('https://edtech.chatbotsafrica.com/', '_blank')"
-  >
-    Start Chat
-  </button>
-</section>
+          <!-- Prompt chips -->
+          <div
+            class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6"
+          >
+            <button
+              class="px-4 py-2 rounded-full bg-white/80 text-gray-900 text-sm font-medium hover:bg-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-white/70"
+              onclick="window.open('https://edtech.chatbotsafrica.com/?q=What%20is%20the%20EdTech%20Strategy%27s%20vision%3F','_blank')"
+            >
+              What is the Strategy’s vision?
+            </button>
+            <button
+              class="px-4 py-2 rounded-full bg-white/80 text-gray-900 text-sm font-medium hover:bg-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-white/70"
+              onclick="window.open('https://edtech.chatbotsafrica.com/?q=Who%20are%20the%20key%20stakeholders%3F','_blank')"
+            >
+              Who are the key stakeholders?
+            </button>
+            <button
+              class="px-4 py-2 rounded-full bg-white/80 text-gray-900 text-sm font-medium hover:bg-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-white/70"
+              onclick="window.open('https://edtech.chatbotsafrica.com/?q=What%20challenges%20does%20it%20address%3F','_blank')"
+            >
+              What challenges are addressed?
+            </button>
+          </div>
 
-
-
+          <!-- Primary CTA -->
+          <div class="flex justify-center mt-8">
+            <button
+              id="openChat"
+              class="px-8 py-3 rounded-full bg-orange-500 text-white font-semibold shadow-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 transition"
+              onclick="window.open('https://edtech.chatbotsafrica.com/', '_blank')"
+            >
+              Start Chat
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Feedback Section -->
-<section class="bg-gray-50 h-screen flex items-center mb-8">
-  <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full">
-
-    <!-- LEFT SIDE: FEEDBACK FORM -->
-    <div class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1">
-      <!-- Title -->
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center md:text-left">
-        We Value Your Feedback
-      </h1>
-
-      <!-- Subtitle -->
-      <p class="text-base text-gray-600 mb-10 text-center md:text-left tracking-tight">
-        Help us improve the Ghana EdTech Strategy by sharing your thoughts and experience below.
-      </p>
-
-      <!-- Feedback Form -->
-      <form id="edtech-feedback-form" class="space-y-6 max-w-lg w-full mx-auto md:mx-0">
-        <!-- Feedback Message -->
-        <div>
-          <label
-            for="feedback-message"
-            class="block text-sm font-semibold text-gray-700 mb-2"
-          >
-            Write Feedback
-          </label>
-          <textarea
-            id="feedback-message"
-            name="feedback"
-            rows="4"
-            placeholder="Type your message here..."
-            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none"
-            required
-          ></textarea>
-        </div>
-
-        <!-- Rating Selection -->
-        <div>
-          <label
-            for="feedback-rating"
-            class="block text-sm font-semibold text-gray-700"
-          >
-            Select Rating
-          </label>
-          <select
-            id="feedback-rating"
-            name="rating"
-            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
-            required
-          >
-            <option value="">-- Select satisfaction level --</option>
-            <option value="very_satisfied">Very Satisfied</option>
-            <option value="satisfied">Satisfied</option>
-            <option value="neutral">Neutral</option>
-            <option value="dissatisfied">Dissatisfied</option>
-            <option value="very_dissatisfied">Very Dissatisfied</option>
-          </select>
-        </div>
-
-        <!-- Status Message -->
-        <div id="status-message" class="text-sm font-medium h-5 text-center md:text-left"></div>
-
-        <!-- Submit Button -->
-        <button
-          type="submit"
-          id="submit-button"
-          class="w-full py-3 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150 ease-in-out"
+    <section
+      class="bg-gray-50 h-screen flex items-center mb-8"
+      aria-labelledby="feedback-heading"
+    >
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full">
+        <!-- LEFT SIDE: FEEDBACK FORM -->
+        <div
+          class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1"
         >
-          Submit
-        </button>
-      </form>
-    </div>
+          <!-- Title -->
+          <h1
+            id="feedback-heading"
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center md:text-left"
+          >
+            Help Shape Ghana’s EdTech Strategy
+          </h1>
 
-    <!-- RIGHT SIDE: IMAGE -->
-    <div class="flex justify-center items-center h-full order-1 md:order-2">
-      <img
-        src="./asset/IMG3.png"
-        alt="Feedback Illustration"
-        class="w-full h-full object-cover"
-      />
-    </div>
+          <!-- Subtitle -->
+          <p
+            class="text-base text-gray-700 mb-6 text-center md:text-left tracking-tight"
+          >
+            Your perspective matters. Share what’s working, what’s missing, and
+            where we can go further, and inform updates to the Strategy.
+          </p>
 
-  </div>
-</section>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-sm">
+            <div
+              class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+            >
+              Takes 1–2 minutes
+            </div>
+            <div
+              class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+            >
+              Anonymous by default
+            </div>
+          </div>
 
+          <!-- Feedback Form -->
+          <form
+            id="edtech-feedback-form"
+            class="space-y-6 max-w-lg w-full mx-auto md:mx-0"
+          >
+            <!-- Feedback Message -->
+            <div>
+              <label
+                for="feedback-message"
+                class="block text-sm font-semibold text-gray-700 mb-2"
+              >
+                Your Feedback
+              </label>
+              <textarea
+                id="feedback-message"
+                name="feedback"
+                rows="4"
+                placeholder="E.g. I like the strategy's vision, but I think it should be more inclusive."
+                class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none"
+                required
+              ></textarea>
+            </div>
 
+            <!-- Rating Selection -->
+            <div>
+              <label
+                for="feedback-rating"
+                class="block text-sm font-semibold text-gray-700"
+              >
+                Overall, how satisfied are you with the Strategy?
+              </label>
+              <select
+                id="feedback-rating"
+                name="rating"
+                class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
+                required
+              >
+                <option value="">-- Select satisfaction level --</option>
+                <option value="very_satisfied">Very Satisfied</option>
+                <option value="satisfied">Satisfied</option>
+                <option value="neutral">Neutral</option>
+                <option value="dissatisfied">Dissatisfied</option>
+                <option value="very_dissatisfied">Very Dissatisfied</option>
+              </select>
+            </div>
+
+            <!-- Status Message -->
+            <div
+              id="status-message"
+              class="text-sm font-medium h-5 text-center md:text-left"
+            ></div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              id="submit-button"
+              class="w-full py-3 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out"
+            >
+              Send Feedback
+            </button>
+
+            <p class="text-xs text-gray-500 mt-3 text-center md:text-left">
+              We only use this information to improve the public Strategy. No
+              marketing. No spam.
+            </p>
+          </form>
+        </div>
+
+        <!-- RIGHT SIDE: IMAGE -->
+        <div class="flex justify-center items-center h-full order-1 md:order-2">
+          <img
+            src="./asset/IMG2.jpg"
+            alt="Feedback Illustration"
+            class="w-full h-full"
+          />
+        </div>
+      </div>
+    </section>
 
     <!-- Footer: full-bleed background with centered, responsive content -->
-    <footer id="contact" class="bg-black text-white mx-0" style="position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; width:100vw;">
+    <footer
+      id="contact"
+      class="bg-black text-white mx-0"
+      style="
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+      "
+    >
       <div class="w-full px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         <!-- Centered content wrapper -->
         <div class="w-full max-w-7xl mx-auto">
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pb-6 text-center md:text-left">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pb-6 text-center md:text-left"
+          >
             <div>
               <h3 class="text-xl font-bold mb-4">Ghana EdTech Strategy</h3>
               <p class="text-gray-400 max-w-md mx-auto md:mx-0">
@@ -530,13 +682,20 @@
             <div>
               <h3 class="text-xl font-bold mb-4">Contact Information</h3>
               <div class="space-y-2">
-                <div class="flex items-center justify-center md:justify-start text-gray-400">
+                <div
+                  class="flex items-center justify-center md:justify-start text-gray-400"
+                >
                   <span class="mr-2">&#9993;</span>
-                  <a href="mailto:edtechstrategy@gmail.com" class="hover:text-white transition duration-200">
+                  <a
+                    href="mailto:edtechstrategy@gmail.com"
+                    class="hover:text-white transition duration-200"
+                  >
                     edtechstrategy@gmail.com
                   </a>
                 </div>
-                <div class="flex items-center justify-center md:justify-start text-gray-400">
+                <div
+                  class="flex items-center justify-center md:justify-start text-gray-400"
+                >
                   <span class="mr-2">&#9742;</span>
                   <span>+233 (0) 000 000 000</span>
                 </div>
@@ -546,10 +705,26 @@
             <div>
               <h3 class="text-xl font-bold mb-4">Ministry Partnership</h3>
               <ul class="text-gray-400 space-y-2">
-                <li><a href="#" class="hover:text-white transition duration-200">CENDLOS, Ghana</a></li>
-                <li><a href="#" class="hover:text-white transition duration-200">World Bank</a></li>
-                <li><a href="#" class="hover:text-white transition duration-200">Mastercard Foundation</a></li>
-                <li><a href="#" class="hover:text-white transition duration-200">MEST Africa</a></li>
+                <li>
+                  <a href="#" class="hover:text-white transition duration-200"
+                    >CENDLOS, Ghana</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition duration-200"
+                    >World Bank</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition duration-200"
+                    >Mastercard Foundation</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition duration-200"
+                    >MEST Africa</a
+                  >
+                </li>
               </ul>
             </div>
           </div>
@@ -563,6 +738,6 @@
         </div>
       </div>
     </footer>
-  <script src="code.js"></script>
+    <script src="code.js"></script>
   </body>
 </html>
