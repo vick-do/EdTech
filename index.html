@@ -42,6 +42,13 @@
           display: none !important;
         }
       }
+
+      @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
+        .hero-bg {
+          background-attachment: scroll;
+          background-position: center top;
+        }
+      }
     </style>
   </head>
   <body
@@ -354,86 +361,119 @@
     </section>
 
     <!-- Documentation Section -->
-  <section id="document"
-    class="min-h-screen flex flex-col justify-center py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100">
-    <div class="max-w-6xl w-full mx-auto">
-      <!-- Enhanced Header -->
-      <div class="text-center mb-12">
-        
-
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-          Read the Strategy Document
-        </h1>
-
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Explore the comprehensive EdTech Strategy that's transforming education through technology, innovation, and
-          inclusive access.
-        </p>
-
-        
-      </div>
-
-      <!-- Enhanced Main Content Box -->
-      <div class="bg-white rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
-        <!-- Document Header Bar -->
-        <div class="bg-gradient-to-r from-gray-900 to-gray-800 px-8 py-6 flex items-center justify-between">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            </div>
-            <div>
-              <h2 class="text-2xl font-bold text-white">Ghana National EdTech Strategy</h2>
-              <p class="text-gray-300 text-sm">Official Strategy Document</p>
-            </div>
-
-          </div>
-
+    <section
+      id="document"
+      class="min-h-screen flex flex-col justify-center py-8 px-4 sm:px-6 lg:px-8 bg-blue"
+    >
+      <div class="max-w-6xl w-full mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <h1
+            class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight"
+          >
+            Read the Strategy Document
+          </h1>
+          <p
+            class="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed"
+          >
+            Explore the comprehensive EdTech Strategy that's transforming
+            education through technology.
+          </p>
         </div>
 
-        <!-- Enhanced CTA Section -->
+        <!-- Main Content Box -->
         <div
-          class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-8 border border-orange-200 text-center m-8">
-          <div class="max-w-2xl mx-auto">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">
-              Ready to Explore the Full Strategy?
-            </h3>
-            <p class="text-gray-700 mb-6">
-              Dive into the complete document with interactive viewing features
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="/document.html"
-                class="group bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center gap-3 min-w-[200px] justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:animate-bounce" viewBox="0 0 20 20"
-                  fill="currentColor">
-                  <path fill-rule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                    clip-rule="evenodd" />
+          class="bg-white rounded-3xl shadow-2xl border border-white/20 overflow-hidden"
+        >
+          <!-- Header Bar -->
+          <div
+            class="bg-gradient-to-r from-gray-900 to-gray-800 px-8 py-6 flex items-center justify-between"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
                 </svg>
-                Read Full Document
-              </a>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-white">
+                  Ghana National EdTech Strategy
+                </h2>
+                <p class="text-gray-300 text-sm">Official Strategy Document</p>
+              </div>
+            </div>
+          </div>
 
-              <div class="flex items-center gap-2 text-sm text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                    clip-rule="evenodd" />
-                </svg>
-                View-only access
+          <!-- CTA Section -->
+          <div
+            class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-8 border border-orange-200 text-center m-8"
+          >
+            <div class="max-w-2xl mx-auto">
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                Ready to Explore the Full Strategy?
+              </h3>
+              <p class="text-gray-700 mb-6">
+                Dive into the complete document with interactive viewing
+                features.
+              </p>
+
+              <div
+                class="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              >
+                <a
+                  href="/document.html"
+                  class="group bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center gap-3 min-w-[200px] justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 group-hover:animate-bounce"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+
+                  Read Full Document
+                </a>
+
+                <div class="flex items-center gap-2 text-sm text-gray-600">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  View-only access
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-    
-
-    </div>
-  </section>
+    </section>
 
     <!-- Chatbot Section -->
     <section
@@ -517,139 +557,138 @@
     </section>
 
     <!-- Feedback Section -->
- <section
-  class="bg-gray-50 py-12 md:py-16 flex items-center mb-0"
-  aria-labelledby="feedback-heading"
->
-  <style>
-    /* Hide image on iPad-sized screens (768px–1024px) */
-    @media (min-width: 768px) and (max-width: 1024px) {
-      .ipad-hidden {
-        display: none !important;
-      }
-      .ipad-fullwidth {
-        grid-template-columns: 1fr !important;
-      }
-    }
-  </style>
-
-  <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full ipad-fullwidth">
-    <!-- LEFT SIDE: FEEDBACK FORM -->
-    <div
-      class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1"
+    <section
+      class="bg-gray-50 py-12 md:py-16 flex items-center mb-0"
+      aria-labelledby="feedback-heading"
     >
-      <!-- Title -->
-      <h1
-        id="feedback-heading"
-        class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center md:text-left"
-      >
-        Help Shape Ghana’s EdTech Strategy
-      </h1>
+      <style>
+        /* Hide image on iPad-sized screens (768px–1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .ipad-hidden {
+            display: none !important;
+          }
+          .ipad-fullwidth {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style>
 
-      <!-- Subtitle -->
-      <p
-        class="text-base text-gray-700 mb-8 text-center md:text-left tracking-tight leading-relaxed"
-      >
-        Your perspective matters. Share what’s working, what’s missing, and
-        where we can go further, and inform updates to the Strategy.
-      </p>
-
-      <!-- Info Tags -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-sm">
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 h-full ipad-fullwidth">
+        <!-- LEFT SIDE: FEEDBACK FORM -->
         <div
-          class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+          class="bg-gray-100 p-10 md:p-16 flex flex-col justify-center h-full order-2 md:order-1"
         >
-          Takes 1–2 minutes
+          <!-- Title -->
+          <h1
+            id="feedback-heading"
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center md:text-left"
+          >
+            Help Shape Ghana’s EdTech Strategy
+          </h1>
+
+          <!-- Subtitle -->
+          <p
+            class="text-base text-gray-700 mb-8 text-center md:text-left tracking-tight leading-relaxed"
+          >
+            Your perspective matters. Share what’s working, what’s missing, and
+            where we can go further, and inform updates to the Strategy.
+          </p>
+
+          <!-- Info Tags -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-sm">
+            <div
+              class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+            >
+              Takes 1–2 minutes
+            </div>
+            <div
+              class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+            >
+              Anonymous by default
+            </div>
+          </div>
+
+          <!-- Feedback Form -->
+          <form
+            id="edtech-feedback-form"
+            class="space-y-6 max-w-lg w-full mx-auto md:mx-0"
+          >
+            <!-- Feedback Message -->
+            <div>
+              <label
+                for="feedback-message"
+                class="block text-sm font-semibold text-gray-700 mb-2"
+              >
+                Your Feedback
+              </label>
+              <textarea
+                id="feedback-message"
+                name="feedback"
+                rows="5"
+                placeholder="E.g. I like the strategy's vision, but I think it should be more inclusive."
+                class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Rating Selection -->
+            <div>
+              <label
+                for="feedback-rating"
+                class="block text-sm font-semibold text-gray-700 mb-2"
+              >
+                Overall, how satisfied are you with the Strategy?
+              </label>
+              <select
+                id="feedback-rating"
+                name="rating"
+                class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
+                required
+              >
+                <option value="">-- Select satisfaction level --</option>
+                <option value="very_satisfied">Very Satisfied</option>
+                <option value="satisfied">Satisfied</option>
+                <option value="neutral">Neutral</option>
+                <option value="dissatisfied">Dissatisfied</option>
+                <option value="very_dissatisfied">Very Dissatisfied</option>
+              </select>
+            </div>
+
+            <!-- Status Message -->
+            <div
+              id="status-message"
+              class="text-sm font-medium h-5 text-center md:text-left"
+            ></div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              id="submit-button"
+              class="w-full py-3.5 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out"
+            >
+              Send Feedback
+            </button>
+
+            <p
+              class="text-xs text-gray-500 mt-4 text-center md:text-left leading-snug"
+            >
+              We only use this information to improve the public Strategy.
+            </p>
+          </form>
         </div>
+
+        <!-- RIGHT SIDE: IMAGE -->
         <div
-          class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700"
+          class="flex justify-center items-center h-full order-1 md:order-2 ipad-hidden"
         >
-          Anonymous by default
+          <img
+            src="./asset/IMG2.jpg"
+            alt="Feedback Illustration"
+            class="w-full h-full object-cover md:object-center"
+          />
         </div>
       </div>
-
-      <!-- Feedback Form -->
-      <form
-        id="edtech-feedback-form"
-        class="space-y-6 max-w-lg w-full mx-auto md:mx-0"
-      >
-        <!-- Feedback Message -->
-        <div >
-          <label
-            for="feedback-message"
-            class="block text-sm font-semibold text-gray-700 mb-2"
-          >
-            Your Feedback
-          </label>
-          <textarea
-            id="feedback-message"
-            name="feedback"
-            rows="5"
-            placeholder="E.g. I like the strategy's vision, but I think it should be more inclusive."
-            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition resize-none  "
-            required
-          ></textarea>
-        </div>
-
-        <!-- Rating Selection -->
-        <div>
-          <label
-            for="feedback-rating"
-            class="block text-sm font-semibold text-gray-700 mb-2 "
-          >
-            Overall, how satisfied are you with the Strategy?
-          </label>
-          <select
-            id="feedback-rating"
-            name="rating"
-            class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800 transition"
-            required
-          >
-            <option value="">-- Select satisfaction level --</option>
-            <option value="very_satisfied">Very Satisfied</option>
-            <option value="satisfied">Satisfied</option>
-            <option value="neutral">Neutral</option>
-            <option value="dissatisfied">Dissatisfied</option>
-            <option value="very_dissatisfied">Very Dissatisfied</option>
-          </select>
-        </div>
-
-        <!-- Status Message -->
-        <div
-          id="status-message"
-          class="text-sm font-medium h-5 text-center md:text-left"
-        ></div>
-
-        <!-- Submit Button -->
-        <button
-          type="submit"
-          id="submit-button"
-          class="w-full py-3.5 px-6 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out"
-        >
-          Send Feedback
-        </button>
-
-        <p class="text-xs text-gray-500 mt-4 text-center md:text-left leading-snug">
-          We only use this information to improve the public Strategy.
-        </p>
-      </form>
-    </div>
-
-    <!-- RIGHT SIDE: IMAGE -->
-    <div
-      class="flex justify-center items-center h-full order-1 md:order-2 ipad-hidden"
-    >
-      <img
-        src="./asset/IMG2.jpg"
-        alt="Feedback Illustration"
-        class="w-full h-full object-cover md:object-center"
-      />
-    </div>
-  </div>
-</section>
-
-
-
+    </section>
 
     <!-- Footer: full-bleed background with centered, responsive content -->
     <footer

@@ -167,12 +167,18 @@
         color: white;
         height: 50px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 200;
       }
 
       .title {
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 600;
         font-family: "Inter", sans-serif;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .meta {
@@ -196,6 +202,15 @@
         align-items: center;
         padding: 2rem 1rem;
         scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .pdf-loading {
+        font-family: "Inter", sans-serif;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        text-align: center;
+        padding: 2rem 0;
       }
 
       .toolbar {
@@ -239,10 +254,32 @@
       .document-wrapper {
         width: 100%;
         max-width: 850px;
-        background: var(--page-bg);
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .pdf-canvas {
+        display: block;
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
         border-radius: 2px;
-        padding: 2rem;
+        margin: 0 auto 2rem;
+        background: white;
+      }
+
+      .pdf-page-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 850px;
+        margin: 0 auto 2rem;
+        border-radius: 2px;
+        background: white;
+        box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
       }
 
       .document-section {
@@ -372,7 +409,7 @@
         }
 
         .document-wrapper {
-          padding: 1rem;
+          width: 100%;
         }
 
         .doc-title {
@@ -381,6 +418,35 @@
 
         .document-section h2 {
           font-size: 1.4rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .layout {
+          height: 100vh;
+          min-height: 100vh;
+          flex-direction: column;
+        }
+
+        .container {
+          height: calc(100vh - 50px);
+          overflow: hidden;
+        }
+
+        .viewer-wrap {
+          height: 100%;
+          min-height: auto;
+          overflow-y: auto;
+          align-items: stretch;
+          padding: 1.5rem 1rem;
+        }
+
+        .document-wrapper {
+          width: 100%;
+        }
+
+        .title {
+          font-size: 0.8rem;
         }
       }
 
@@ -475,13 +541,25 @@
             <h3>Front Matter</h3>
             <ul class="nav-links">
               <li>
-                <a href="#executive-summary" class="nav-link active" data-section="executive-summary">Executive Summary</a>
+                <a
+                  href="#executive-summary"
+                  class="nav-link active"
+                  data-section="executive-summary"
+                  >Executive Summary</a
+                >
               </li>
               <li>
-                <a href="#introduction" class="nav-link" data-section="introduction">Introduction</a>
+                <a
+                  href="#introduction"
+                  class="nav-link"
+                  data-section="introduction"
+                  >Introduction</a
+                >
               </li>
               <li>
-                <a href="#vision" class="nav-link" data-section="vision">Vision & Mission</a>
+                <a href="#vision" class="nav-link" data-section="vision"
+                  >Vision & Mission</a
+                >
               </li>
             </ul>
           </div>
@@ -490,46 +568,95 @@
             <h3>Thematic Areas</h3>
             <ul class="nav-links">
               <li>
-                <a href="#governance" class="nav-link" data-section="governance">Governance & Management</a>
+                <a href="#governance" class="nav-link" data-section="governance"
+                  >Governance & Management</a
+                >
               </li>
               <li>
-                <a href="#infrastructure" class="nav-link" data-section="infrastructure">Infrastructure & Connectivity</a>
+                <a
+                  href="#infrastructure"
+                  class="nav-link"
+                  data-section="infrastructure"
+                  >Infrastructure & Connectivity</a
+                >
               </li>
               <li>
-                <a href="#content" class="nav-link" data-section="content">Content Development</a>
+                <a href="#content" class="nav-link" data-section="content"
+                  >Content Development</a
+                >
               </li>
               <li>
-                <a href="#capacity" class="nav-link" data-section="capacity">Capacity Building</a>
+                <a href="#capacity" class="nav-link" data-section="capacity"
+                  >Capacity Building</a
+                >
               </li>
               <li>
-                <a href="#curriculum" class="nav-link" data-section="curriculum">Curriculum Integration</a>
+                <a href="#curriculum" class="nav-link" data-section="curriculum"
+                  >Curriculum Integration</a
+                >
               </li>
               <li>
-                <a href="#inclusivity" class="nav-link" data-section="inclusivity">Inclusivity & Access</a>
+                <a
+                  href="#inclusivity"
+                  class="nav-link"
+                  data-section="inclusivity"
+                  >Inclusivity & Access</a
+                >
               </li>
               <li>
-                <a href="#cybersecurity" class="nav-link" data-section="cybersecurity">Cybersecurity & Data</a>
+                <a
+                  href="#cybersecurity"
+                  class="nav-link"
+                  data-section="cybersecurity"
+                  >Cybersecurity & Data</a
+                >
               </li>
               <li>
-                <a href="#innovation" class="nav-link" data-section="innovation">Innovation & Learning</a>
+                <a href="#innovation" class="nav-link" data-section="innovation"
+                  >Innovation & Learning</a
+                >
               </li>
               <li>
-                <a href="#data-management" class="nav-link" data-section="data-management">Data Management & Reporting</a>
+                <a
+                  href="#data-management"
+                  class="nav-link"
+                  data-section="data-management"
+                  >Data Management & Reporting</a
+                >
               </li>
               <li>
-                <a href="#data-protection" class="nav-link" data-section="data-protection">Data Protection</a>
+                <a
+                  href="#data-protection"
+                  class="nav-link"
+                  data-section="data-protection"
+                  >Data Protection</a
+                >
               </li>
               <li>
-                <a href="#experiential" class="nav-link" data-section="experiential">Experiential Learning & Innovations</a>
+                <a
+                  href="#experiential"
+                  class="nav-link"
+                  data-section="experiential"
+                  >Experiential Learning & Innovations</a
+                >
               </li>
               <li>
-                <a href="#monitoring" class="nav-link" data-section="monitoring">Monitoring & Evaluation</a>
+                <a href="#monitoring" class="nav-link" data-section="monitoring"
+                  >Monitoring & Evaluation</a
+                >
               </li>
               <li>
-                <a href="#sustainability" class="nav-link" data-section="sustainability">Sustainable & Financially Inclusive Systems</a>
+                <a
+                  href="#sustainability"
+                  class="nav-link"
+                  data-section="sustainability"
+                  >Sustainable & Financially Inclusive Systems</a
+                >
               </li>
               <li>
-                <a href="#conclusion" class="nav-link" data-section="conclusion">Conclusion</a>
+                <a href="#conclusion" class="nav-link" data-section="conclusion"
+                  >Conclusion</a
+                >
               </li>
             </ul>
           </div>
@@ -538,10 +665,20 @@
             <h3>Appendix</h3>
             <ul class="nav-links">
               <li>
-                <a href="#definitions" class="nav-link" data-section="definitions">Definitions</a>
+                <a
+                  href="#definitions"
+                  class="nav-link"
+                  data-section="definitions"
+                  >Definitions</a
+                >
               </li>
               <li>
-                <a href="#abbreviations" class="nav-link" data-section="abbreviations">Abbreviations</a>
+                <a
+                  href="#abbreviations"
+                  class="nav-link"
+                  data-section="abbreviations"
+                  >Abbreviations</a
+                >
               </li>
             </ul>
           </div>
@@ -563,263 +700,8 @@
 
         <main class="container" role="main">
           <div class="viewer-wrap" id="viewerWrap">
-            
-
             <div class="document-wrapper">
-              <!-- Title Page -->
-              <div class="document-page">
-                <div class="doc-header">
-                  <div class="doc-logo">📚</div>
-                  <p class="doc-subtitle">Ministry of Education</p>
-                  <h1 class="doc-title">Ghana EdTech Strategy 2024-2030</h1>
-                  <div class="doc-meta">
-                    <p>Transforming Education Through Technology</p>
-                    <p style="margin-top: 1rem; font-size: 0.85rem; color: #999">
-                      Document Version 1.0 | Published: November 2024
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Executive Summary -->
-              <div class="document-page">
-                <section id="executive-summary" class="document-section">
-                  <h2>Executive Summary</h2>
-                  <p>
-                    This comprehensive strategy document outlines Ghana's vision for integrating educational technology across all levels of the education system. The Ghana EdTech Strategy 2024-2030 represents a commitment to leveraging technology to enhance learning outcomes, increase accessibility, and prepare students for the digital economy.
-                  </p>
-                  <p>
-                    The strategy addresses nine critical thematic areas, each with specific objectives and actionable initiatives designed to transform educational delivery and improve student achievement across the nation.
-                  </p>
-                  <div class="highlight-box">
-                    <h4>Key Objectives:</h4>
-                    <ul>
-                      <li>Establish sustainable digital infrastructure in all educational institutions</li>
-                      <li>Develop quality digital content aligned with national curriculum</li>
-                      <li>Build educator capacity in technology-enhanced teaching</li>
-                      <li>Ensure equitable access to technology for all learners</li>
-                      <li>Implement robust cybersecurity and data protection measures</li>
-                    </ul>
-                  </div>
-                </section>
-              </div>
-
-              <!-- Introduction -->
-              <div class="document-page">
-                <section id="introduction" class="document-section">
-                  <h2>Introduction & Rationale</h2>
-                  <p>
-                    Education is the foundation of national development. In an increasingly digital world, Ghana recognizes that educational technology is no longer optional but essential for preparing citizens who can compete in the global economy.
-                  </p>
-                  <p>
-                    The rapid advancement of technology presents both opportunities and challenges. Educational institutions must evolve to meet changing societal needs while ensuring that no learner is left behind due to digital divide or lack of resources.
-                  </p>
-                  <h3>Why EdTech Now?</h3>
-                  <p>
-                    The COVID-19 pandemic accelerated the adoption of digital learning tools worldwide. This experience demonstrated the critical importance of technology in education and the urgent need for comprehensive infrastructure and support systems.
-                  </p>
-                  <div class="quote">
-                    "Education must evolve to meet the needs of our time. Technology is not a luxury—it is a necessity for equitable, quality education for all Ghanaians."
-                  </div>
-                </section>
-              </div>
-
-              <!-- Vision & Mission -->
-              <div class="document-page">
-                <section id="vision" class="document-section">
-                  <h2>Vision & Mission</h2>
-                  <h3>Vision</h3>
-                  <p>
-                    To create an inclusive, technology-enabled education system that empowers all learners in Ghana with the knowledge, skills, and competencies needed for personal growth and meaningful participation in the digital society.
-                  </p>
-                  <h3>Mission</h3>
-                  <p>
-                    To strategically implement educational technology across Ghana's education system by strengthening digital infrastructure, developing quality content, building educator capacity, ensuring equitable access, and establishing robust governance frameworks that prioritize student learning outcomes and societal impact.
-                  </p>
-                  <h3>Core Values</h3>
-                  <ul>
-                    <li><strong>Equity:</strong> Technology should reduce rather than increase educational disparities</li>
-                    <li><strong>Quality:</strong> Technology must enhance learning, not replace quality teaching</li>
-                    <li><strong>Sustainability:</strong> Solutions must be economically and environmentally sustainable</li>
-                    <li><strong>Innovation:</strong> Continuous improvement through evidence-based approaches</li>
-                    <li><strong>Accountability:</strong> Transparent implementation with measurable outcomes</li>
-                  </ul>
-                </section>
-              </div>
-
-              <!-- Governance -->
-              <div class="document-page">
-                <section id="governance" class="document-section">
-                  <h2>1. Governance & Management</h2>
-                  <p>
-                    Effective governance structures are essential for coordinating EdTech initiatives across the vast educational landscape. This thematic area establishes institutional frameworks, defines stakeholder roles, and outlines implementation mechanisms.
-                  </p>
-                  <h3>Institutional Framework</h3>
-                  <p>
-                    A dedicated EdTech Directorate will be established within the Ministry of Education to oversee strategy implementation, coordinate with stakeholders, and monitor progress against key performance indicators.
-                  </p>
-                  <div class="highlight-box">
-                    <h4>Key Initiatives:</h4>
-                    <ul>
-                      <li>Establish EdTech Directorate with trained personnel</li>
-                      <li>Create inter-agency coordination mechanisms</li>
-                      <li>Develop monitoring and evaluation framework</li>
-                      <li>Implement risk management protocols</li>
-                    </ul>
-                  </div>
-                </section>
-              </div>
-
-              <!-- Infrastructure -->
-              <div class="document-page">
-                <section id="infrastructure" class="document-section">
-                  <h2>2. Infrastructure & Connectivity</h2>
-                  <p>
-                    Digital infrastructure forms the foundation for educational technology initiatives. This area focuses on expanding broadband connectivity, providing appropriate devices, and ensuring reliable power supply in all educational institutions.
-                  </p>
-                  <h3>Connectivity Goals</h3>
-                  <ul>
-                    <li>Achieve 95% broadband coverage in urban and peri-urban areas by 2027</li>
-                    <li>Extend 4G connectivity to 80% of rural educational institutions by 2028</li>
-                    <li>Install backup power systems in all schools by 2026</li>
-                    <li>Provide devices to at least 1 device per 3 students by 2025</li>
-                  </ul>
-                </section>
-              </div>
-
-              <!-- Content Development -->
-              <div class="document-page">
-                <section id="content" class="document-section">
-                  <h2>3. Content Development</h2>
-                  <p>
-                    Quality digital content is the lifeblood of effective technology-enabled learning. This thematic area addresses content creation, curation, localization, and accessibility standards.
-                  </p>
-                  <h3>Content Strategy</h3>
-                  <p>
-                    A national content repository will be developed featuring curriculum-aligned, interactive learning materials in multiple formats. Content will be available in both English and major Ghanaian languages to ensure accessibility.
-                  </p>
-                </section>
-              </div>
-
-              <!-- Capacity Building -->
-              <div class="document-page">
-                <section id="capacity" class="document-section">
-                  <h2>4. Capacity Building</h2>
-                  <p>
-                    Teachers are central to successful EdTech implementation. Comprehensive professional development programs will equip educators with skills in technology integration, digital pedagogy, and online assessment.
-                  </p>
-                  <h3>Training Programs</h3>
-                  <ul>
-                    <li>Initial teacher training reform to include digital literacy</li>
-                    <li>In-service training for 50,000+ teachers annually</li>
-                    <li>Specialized training for school leaders on technology management</li>
-                    <li>Peer mentoring and community of practice initiatives</li>
-                  </ul>
-                </section>
-              </div>
-
-              <!-- Curriculum Integration -->
-              <div class="document-page">
-                <section id="curriculum" class="document-section">
-                  <h2>5. Curriculum Integration</h2>
-                  <p>
-                    Technology must be meaningfully integrated into the curriculum to enhance learning outcomes. This involves curriculum review, teacher support, and assessment reforms.
-                  </p>
-                  <h3>Integration Approach</h3>
-                  <p>
-                    Technology will be integrated both as a subject (digital literacy, coding) and as a tool across all subjects. The curriculum will emphasize critical thinking, problem-solving, and collaboration—skills essential in the digital age.
-                  </p>
-                </section>
-              </div>
-
-              <!-- Inclusivity -->
-              <div class="document-page">
-                <section id="inclusivity" class="document-section">
-                  <h2>6. Inclusivity & Access</h2>
-                  <p>
-                    EdTech initiatives must reach marginalized learners including those in remote areas, students with disabilities, and economically disadvantaged populations. This area prioritizes equity in access and universal design principles.
-                  </p>
-                  <h3>Equity Commitments</h3>
-                  <ul>
-                    <li>Support for learners with visual and hearing impairments</li>
-                    <li>Offline-capable resources for areas with poor connectivity</li>
-                    <li>Multilingual content and interface options</li>
-                    <li>Subsidized device programs for low-income students</li>
-                  </ul>
-                </section>
-              </div>
-
-              <!-- Cybersecurity -->
-              <div class="document-page">
-                <section id="cybersecurity" class="document-section">
-                  <h2>7. Cybersecurity & Data Protection</h2>
-                  <p>
-                    As education becomes increasingly digital, protecting student data and ensuring secure learning environments is paramount. This area establishes security standards, privacy frameworks, and incident response protocols.
-                  </p>
-                  <h3>Security Framework</h3>
-                  <ul>
-                    <li>Implement GDPR and African Union standards for data protection</li>
-                    <li>Conduct regular security audits and vulnerability assessments</li>
-                    <li>Develop comprehensive cybersecurity awareness programs</li>
-                    <li>Establish data breach notification and response procedures</li>
-                  </ul>
-                </section>
-              </div>
-
-              <!-- Innovation -->
-              <div class="document-page">
-                <section id="innovation" class="document-section">
-                  <h2>8. Innovation & Emerging Technologies</h2>
-                  <p>
-                    This thematic area encourages experimentation with emerging technologies such as artificial intelligence, augmented reality, and blockchain while maintaining focus on educational outcomes.
-                  </p>
-                  <h3>Innovation Priorities</h3>
-                  <ul>
-                    <li>AI-powered personalized learning systems</li>
-                    <li>Virtual and augmented reality applications</li>
-                    <li>Blockchain-based credentialing systems</li>
-                    <li>IoT sensors for learning analytics</li>
-                  </ul>
-                </section>
-              </div>
-
-              <!-- Definitions -->
-              <div class="document-page">
-                <section id="definitions" class="document-section">
-                  <h2>Definitions & Terminology</h2>
-                  <h3>Key Concepts</h3>
-                  <p>
-                    <strong>EdTech (Educational Technology):</strong> The application of technology to improve teaching, learning, and educational outcomes.
-                  </p>
-                  <p>
-                    <strong>Digital Literacy:</strong> The ability to effectively use digital devices and the internet to find, evaluate, create, and communicate information.
-                  </p>
-                  <p>
-                    <strong>Blended Learning:</strong> An instructional approach combining in-person and online learning experiences.
-                  </p>
-                  <p>
-                    <strong>Learning Analytics:</strong> The measurement and analysis of learner data to optimize teaching and learning processes.
-                  </p>
-                </section>
-              </div>
-
-              <!-- Abbreviations -->
-              <div class="document-page">
-                <section id="abbreviations" class="document-section">
-                  <h2>Abbreviations</h2>
-                  <ul>
-                    <li><strong>AI:</strong> Artificial Intelligence</li>
-                    <li><strong>AR:</strong> Augmented Reality</li>
-                    <li><strong>EdTech:</strong> Educational Technology</li>
-                    <li><strong>GDPR:</strong> General Data Protection Regulation</li>
-                    <li><strong>ICT:</strong> Information and Communication Technology</li>
-                    <li><strong>IoT:</strong> Internet of Things</li>
-                    <li><strong>LMS:</strong> Learning Management System</li>
-                    <li><strong>MOOC:</strong> Massive Open Online Course</li>
-                    <li><strong>VR:</strong> Virtual Reality</li>
-                  </ul>
-                </section>
-              </div>
+              <div class="pdf-loading" id="pdfLoading">Preparing document…</div>
             </div>
           </div>
         </main>
@@ -834,7 +716,7 @@
       const menuToggle = document.getElementById("menuToggle");
       const sidebar = document.querySelector(".sidebar");
       const progressBar = document.getElementById("readingProgress");
-      const documentWrapper = document.querySelector('.document-wrapper');
+      const documentWrapper = document.querySelector(".document-wrapper");
 
       // Back button functionality
       backBtn.addEventListener("click", () => {
@@ -866,7 +748,8 @@
 
       // Set up PDF.js worker
       if (window.pdfjsLib) {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
       }
 
       // Helper: create and render a page canvas
@@ -886,31 +769,31 @@
           }
 
           // create canvas
-          const canvas = document.createElement('canvas');
-          canvas.className = 'pdf-canvas';
+          const canvas = document.createElement("canvas");
+          canvas.className = "pdf-canvas";
           canvas.dataset.pageNum = pageNum;
           // Set size for crisp rendering on high-DPI
           const outputScale = window.devicePixelRatio || 1;
           canvas.width = Math.floor(viewport.width * outputScale);
           canvas.height = Math.floor(viewport.height * outputScale);
-          canvas.style.width = Math.floor(viewport.width) + 'px';
-          canvas.style.height = Math.floor(viewport.height) + 'px';
+          canvas.style.width = Math.floor(viewport.width) + "px";
+          canvas.style.height = Math.floor(viewport.height) + "px";
 
-          const ctx = canvas.getContext('2d');
+          const ctx = canvas.getContext("2d");
           if (outputScale !== 1) {
             ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
           }
 
           const renderContext = {
             canvasContext: ctx,
-            viewport: viewport
+            viewport: viewport,
           };
 
           // insert a placeholder while rendering
-          const placeholder = document.createElement('div');
-          placeholder.className = 'pdf-page-placeholder';
-          placeholder.style.height = Math.floor(viewport.height) + 'px';
-          placeholder.style.width = '100%';
+          const placeholder = document.createElement("div");
+          placeholder.className = "pdf-page-placeholder";
+          placeholder.style.height = Math.floor(viewport.height) + "px";
+          placeholder.style.width = "100%";
 
           // Append canvas (after rendering we replace placeholder)
           documentWrapper.appendChild(placeholder);
@@ -919,6 +802,7 @@
             documentWrapper.replaceChild(canvas, placeholder);
             pageCanvases[pageNum] = canvas;
             renderedPages.add(pageNum);
+            updatePageCounter();
             return canvas;
           });
         });
@@ -926,23 +810,24 @@
 
       function renderAllPages() {
         if (!pdfDoc) return;
-        // clear wrapper and render pages progressively
-        documentWrapper.innerHTML = '';
+        documentWrapper.innerHTML = "";
         renderedPages.clear();
         pageCanvases = {};
 
-        // Render first few pages eagerly to improve perceived performance
-        const initial = Math.min(3, pdfDoc.numPages);
-        const promises = [];
-        for (let i = 1; i <= initial; i++) {
-          promises.push(renderPage(i));
-        }
+        const renderSequential = (pageNum) => {
+          if (pageNum > pdfDoc.numPages) {
+            updatePageCounter();
+            return;
+          }
 
-        Promise.all(promises).then(() => {
-          // After initial render, schedule lazy rendering of remaining pages
-          lazyRenderAroundViewport();
-          updatePageCounter();
-        }).catch(console.error);
+          renderPage(pageNum)
+            .then(() => {
+              renderSequential(pageNum + 1);
+            })
+            .catch(console.error);
+        };
+
+        renderSequential(1);
       }
 
       // Update page counter / progress based on which canvas is visible
@@ -950,21 +835,23 @@
         if (!pdfDoc) return;
 
         const scrollTop = viewerWrap.scrollTop;
+        const viewportHeight = viewerWrap.clientHeight;
         let currentPage = 1;
 
         for (let i = 1; i <= pdfDoc.numPages; i++) {
           const canvas = pageCanvases[i];
           if (canvas) {
-            const canvasTop = canvas.offsetTop - viewerWrap.offsetTop;
-            if (scrollTop >= canvasTop - 200) {
+            const canvasTop = canvas.offsetTop;
+            const canvasBottom = canvasTop + canvas.offsetHeight;
+            if (scrollTop + viewportHeight * 0.25 >= canvasTop) {
               currentPage = i;
-            } else {
+            }
+            if (scrollTop < canvasBottom) {
               break;
             }
           }
         }
 
-        // update progress bar
         const percent = (currentPage / pdfDoc.numPages) * 100;
         progressBar.style.width = `${percent}%`;
 
@@ -975,98 +862,84 @@
       // Page-to-section mapping: each sidebar link mapped to its starting PDF page
       // Updated from the attached PDF (user-provided mapping)
       const sectionPageMap = {
-        'executive-summary': 17,
-        'introduction': 18,
-        'vision': 19,
-        'governance': 22,
-        'infrastructure': 34,
-        'content': 46,
-        'capacity': 51,
-        'curriculum': 56,
-        'inclusivity': 67,
-        'innovation': 75,
-        'cybersecurity': 82,
-        'data-management': 94,
-        'data-protection': 100,
-        'experiential': 108,
-        'monitoring': 123,
-        'sustainability': 129,
-        'conclusion': 132,
-        'definitions': 15,
-        'abbreviations': 32
+        "executive-summary": 17,
+        introduction: 18,
+        vision: 19,
+        governance: 22,
+        infrastructure: 34,
+        content: 46,
+        capacity: 51,
+        curriculum: 56,
+        inclusivity: 67,
+        innovation: 75,
+        cybersecurity: 82,
+        "data-management": 94,
+        "data-protection": 100,
+        experiential: 108,
+        monitoring: 123,
+        sustainability: 129,
+        conclusion: 132,
+        definitions: 15,
+        abbreviations: 32,
       };
 
       // Update sidebar highlight based on current PDF page
       function updateSidebarByPage(pageNum) {
         if (!navLinks || navLinks.length === 0) return;
-        
+
         // Find which section the current page falls into
         let activeSection = null;
-        const pageArray = Object.entries(sectionPageMap).sort((a, b) => a[1] - b[1]);
-        
+        const pageArray = Object.entries(sectionPageMap).sort(
+          (a, b) => a[1] - b[1]
+        );
+
         for (let i = pageArray.length - 1; i >= 0; i--) {
           if (pageNum >= pageArray[i][1]) {
             activeSection = pageArray[i][0];
             break;
           }
         }
-        
+
         // Update active class
-        navLinks.forEach(link => link.classList.remove('active'));
+        navLinks.forEach((link) => link.classList.remove("active"));
         if (activeSection) {
-          const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
-          if (activeLink) activeLink.classList.add('active');
+          const activeLink = document.querySelector(
+            `.nav-link[data-section="${activeSection}"]`
+          );
+          if (activeLink) activeLink.classList.add("active");
         }
       }
 
-      // Lazy-render pages near viewport
-      let scrollLazyTimer = null;
-      function lazyRenderAroundViewport() {
-        if (!pdfDoc) return;
-        clearTimeout(scrollLazyTimer);
-        scrollLazyTimer = setTimeout(() => {
-          const scrollTop = viewerWrap.scrollTop;
-          const viewportHeight = viewerWrap.clientHeight;
-          for (let i = 1; i <= pdfDoc.numPages; i++) {
-            if (!renderedPages.has(i)) {
-              // estimate position: if page placeholder exists, use offset, otherwise use index
-              const estimatedPos = (pageCanvases[i] && pageCanvases[i].offsetTop) || (i - 1) * 800;
-              if (estimatedPos < scrollTop + viewportHeight * 2 && estimatedPos > scrollTop - viewportHeight) {
-                renderPage(i).catch(console.error);
-              }
-            }
-          }
-        }, 120);
-      }
-
       // Load PDF from asset folder
-      const pdfPath = 'asset/Strategy Document.pdf';
+      const pdfPath = "asset/Strategy Document.pdf";
 
       function loadPdfAndRender() {
         if (!window.pdfjsLib) return;
-        pdfjsLib.getDocument(pdfPath).promise.then((doc) => {
-          pdfDoc = doc;
-          // clear existing HTML 'sections' and render pages
-          renderAllPages();
-        }).catch((err) => {
-          console.error('Error loading PDF:', err);
-        });
+        pdfjsLib
+          .getDocument(pdfPath)
+          .promise.then((doc) => {
+            pdfDoc = doc;
+            // clear existing HTML 'sections' and render pages
+            renderAllPages();
+          })
+          .catch((err) => {
+            console.error("Error loading PDF:", err);
+          });
       }
 
       // Listen to scroll events for progress and lazy rendering
-      viewerWrap.addEventListener('scroll', () => {
+      viewerWrap.addEventListener("scroll", () => {
         updatePageCounter();
-        lazyRenderAroundViewport();
       });
 
       // handle resize: re-render to fit width
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         if (fitToWidth && pdfDoc) {
           // re-render pages to adapt to new width
           renderAllPages();
         }
         if (window.innerWidth > 768) {
-          sidebar.classList.remove('active');
+          sidebar.classList.remove("active");
         }
       });
 
@@ -1075,7 +948,7 @@
         loadPdfAndRender();
       } else {
         // In rare cases the CDN may fail; attempt to load when available
-        window.addEventListener('load', () => {
+        window.addEventListener("load", () => {
           if (window.pdfjsLib) loadPdfAndRender();
         });
       }
@@ -1119,15 +992,17 @@
           e.preventDefault();
           const sectionId = link.getAttribute("data-section");
           const targetPage = sectionPageMap[sectionId];
-          
+
           if (targetPage && pdfDoc) {
             // Ensure page is rendered
-            renderPage(targetPage).then(() => {
-              const canvas = pageCanvases[targetPage];
-              if (canvas) {
-                canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }).catch(console.error);
+            renderPage(targetPage)
+              .then(() => {
+                const canvas = pageCanvases[targetPage];
+                if (canvas) {
+                  canvas.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              })
+              .catch(console.error);
           }
         });
       });
