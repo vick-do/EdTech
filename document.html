@@ -941,6 +941,28 @@
       // Load PDF from asset folder
       const pdfPath = "asset/Strategy Document.pdf";
 
+      // Function to scroll to a specific section/page
+      function scrollToSection(sectionId) {
+        if (!pdfDoc || !sectionPageMap[sectionId]) return;
+
+        const targetPage = sectionPageMap[sectionId];
+
+        // Wait for the target page to be rendered, then scroll
+        const checkAndScroll = () => {
+          const canvas = pageCanvases[targetPage];
+          if (canvas) {
+            canvas.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Update sidebar to highlight the section
+            updateSidebarByPage(targetPage);
+          } else {
+            // If page not rendered yet, wait a bit and try again
+            setTimeout(checkAndScroll, 100);
+          }
+        };
+
+        checkAndScroll();
+      }
+
       function loadPdfAndRender() {
         if (!window.pdfjsLib) return;
         pdfjsLib
@@ -949,6 +971,13 @@
             pdfDoc = doc;
             // clear existing HTML 'sections' and render pages
             renderAllPages();
+
+            // Check for hash in URL and scroll to section
+            const hash = window.location.hash.replace("#", "");
+            if (hash && sectionPageMap[hash]) {
+              // Wait a bit for pages to start rendering
+              setTimeout(() => scrollToSection(hash), 500);
+            }
           })
           .catch((err) => {
             console.error("Error loading PDF:", err);
