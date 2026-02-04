@@ -103,4 +103,96 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // ------------------- Homepage Feedback Form -------------------
+  
+  const DEVICE_ID_KEY = "edtech-device-id";
+  const API_URL = "https://edudoc-610o.onrender.com/api/feedback/submit";
+
+  // Get or create device ID
+  function getDeviceId() {
+    let deviceId = localStorage.getItem(DEVICE_ID_KEY);
+    if (!deviceId) {
+      deviceId = "device_" + Date.now() + "_" + Math.random().toString(36).substring(2, 10);
+      localStorage.setItem(DEVICE_ID_KEY, deviceId);
+    }
+    return deviceId;
+  }
+
+  // Map rating values to backend format
+  const ratingMap = {
+    "very_satisfied": "very satisfied",
+    "satisfied": "satisfied",
+    "neutral": "neutral",
+    "dissatisfied": "dissatisfied",
+    "very_dissatisfied": "very dissatisfied"
+  };
+
+  // Get form elements
+  const feedbackForm = document.getElementById("edtech-feedback-form");
+  const feedbackMessage = document.getElementById("feedback-message");
+  const feedbackRating = document.getElementById("feedback-rating");
+  const submitButton = document.getElementById("submit-button");
+  const statusMessage = document.getElementById("status-message");
+
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const feedback = feedbackMessage.value.trim();
+      const rating = feedbackRating.value;
+
+      // Validate
+      if (!feedback) {
+        statusMessage.textContent = "Please enter your feedback.";
+        statusMessage.className = "text-sm font-medium h-5 text-center md:text-left text-red-600";
+        return;
+      }
+
+      if (!rating) {
+        statusMessage.textContent = "Please select a satisfaction level.";
+        statusMessage.className = "text-sm font-medium h-5 text-center md:text-left text-red-600";
+        return;
+      }
+
+      // Disable button while submitting
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+      statusMessage.textContent = "";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            device_id: getDeviceId(),
+            feedback: feedback,
+            rating: ratingMap[rating] || "neutral"
+          })
+        });
+
+        if (response.ok) {
+          statusMessage.textContent = "Thank you for your feedback!";
+          statusMessage.className = "text-sm font-medium h-5 text-center md:text-left text-green-600";
+          feedbackMessage.value = "";
+          feedbackRating.value = "";
+        } else {
+          statusMessage.textContent = "Failed to submit. Please try again.";
+          statusMessage.className = "text-sm font-medium h-5 text-center md:text-left text-red-600";
+        }
+      } catch (error) {
+        console.error("Feedback submission error:", error);
+        statusMessage.textContent = "Network error. Please try again.";
+        statusMessage.className = "text-sm font-medium h-5 text-center md:text-left text-red-600";
+      }
+
+      // Re-enable button
+      submitButton.disabled = false;
+      submitButton.textContent = "Send Feedback";
+    });
+  }
+
+  // ------------------- end Homepage Feedback Form -------------------
 });
