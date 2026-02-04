@@ -578,6 +578,79 @@
         height: 24px;
       }
 
+      /* Pulse animation for onboarding */
+      @keyframes feedback-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+          transform: scale(1.1);
+          box-shadow: 0 6px 20px rgba(212, 165, 116, 0.5);
+        }
+      }
+
+      @keyframes tooltip-pulse {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+          box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+        }
+        50% {
+          transform: translateY(-3px) scale(1.02);
+          box-shadow: 0 6px 20px rgba(212, 165, 116, 0.5);
+        }
+      }
+
+      .feedback-toggle.pulsing {
+        animation: feedback-pulse 1.5s ease-in-out infinite;
+        background: var(--accent);
+      }
+
+      .feedback-toggle.pulsing:hover {
+        animation: none;
+        transform: scale(1.08);
+        background: #c4956a;
+      }
+
+      /* Tooltip callout bubble */
+      .feedback-tooltip {
+        position: absolute;
+        bottom: 70px;
+        right: 0;
+        background: var(--accent);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        pointer-events: none;
+      }
+
+      .feedback-tooltip.visible {
+        opacity: 1;
+        visibility: visible;
+        animation: tooltip-pulse 1.5s ease-in-out infinite;
+      }
+
+      /* Tooltip arrow pointing down */
+      .feedback-tooltip::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        right: 20px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid var(--accent);
+      }
+
       .feedback-panel {
         position: absolute;
         bottom: 70px;
@@ -1692,6 +1765,11 @@
 
     <!-- Feedback Widget -->
     <div id="feedback-widget" class="feedback-widget" aria-label="Feedback widget">
+      <!-- Onboarding Tooltip -->
+      <div id="feedback-tooltip" class="feedback-tooltip">
+        💬 Share your feedback!
+      </div>
+      
       <!-- Collapsed State: Icon Button -->
       <button 
         id="feedback-toggle" 
@@ -1759,6 +1837,28 @@
     <script>
       const feedbackWidget = new FeedbackWidget();
       feedbackWidget.init();
+
+      // Onboarding: Show tooltip and pulse on every visit
+      (function() {
+        const tooltip = document.getElementById("feedback-tooltip");
+        const toggle = document.getElementById("feedback-toggle");
+
+        // Show tooltip and start pulse animation after a short delay
+        setTimeout(function() {
+          if (tooltip && toggle) {
+            tooltip.classList.add("visible");
+            toggle.classList.add("pulsing");
+          }
+        }, 1500); // Wait 1.5s after page load
+
+        // Dismiss when user clicks the feedback button
+        if (toggle) {
+          toggle.addEventListener("click", function dismissOnboarding() {
+            if (tooltip) tooltip.classList.remove("visible");
+            toggle.classList.remove("pulsing");
+          }, { once: true });
+        }
+      })();
     </script>
   </body>
 </html>
