@@ -625,11 +625,11 @@
               <div class="feedback-form-field">
                 <label for="chatFeedbackRating">How helpful was the bot?</label>
                 <div class="feedback-rating-buttons">
-                  <button type="button" class="rating-btn" data-rating="very_satisfied" title="Very Helpful">😊</button>
-                  <button type="button" class="rating-btn" data-rating="satisfied" title="Helpful">🙂</button>
+                  <button type="button" class="rating-btn" data-rating="very_satisfied" title="Very Satisfied">😊</button>
+                  <button type="button" class="rating-btn" data-rating="satisfied" title="Satisfied">🙂</button>
                   <button type="button" class="rating-btn" data-rating="neutral" title="Neutral">😐</button>
-                  <button type="button" class="rating-btn" data-rating="dissatisfied" title="Not Helpful">😕</button>
-                  <button type="button" class="rating-btn" data-rating="very_dissatisfied" title="Very Unhelpful">😞</button>
+                  <button type="button" class="rating-btn" data-rating="dissatisfied" title="Dissatisfied">😕</button>
+                  <button type="button" class="rating-btn" data-rating="very_dissatisfied" title="Very Dissatisfied">😞</button>
                 </div>
                 <input type="hidden" id="chatFeedbackRating" name="rating" value="">
               </div>
@@ -1121,7 +1121,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               device_id: deviceId,
-              feedback: comment || 'Chatbot feedback: ' + (ratingMap[rating] || rating),
+              feedback: comment || '',
               rating: rating ? ratingMap[rating] : 'neutral',
               source: 'chatbot'
             })
