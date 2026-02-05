@@ -537,19 +537,19 @@
           >
             <button
               class="px-4 py-2 rounded-full bg-white/80 text-gray-900 text-sm font-medium hover:bg-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-white/70"
-              onclick="window.open('https://edtech.chatbotsafrica.com/?q=What%20is%20the%20EdTech%20Strategy%27s%20vision%3F','_blank')"
+              onclick="openChatModal('What is the EdTech Strategy\'s vision?')"
             >
               What is the Strategy’s vision?
             </button>
             <button
               class="px-4 py-2 rounded-full bg-white/80 text-gray-900 text-sm font-medium hover:bg-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-white/70"
-              onclick="window.open('https://edtech.chatbotsafrica.com/?q=Who%20are%20the%20key%20stakeholders%3F','_blank')"
+              onclick="openChatModal('Who are the key stakeholders?')"
             >
               Who are the key stakeholders?
             </button>
             <button
               class="px-4 py-2 rounded-full bg-white/80 text-gray-900 text-sm font-medium hover:bg-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-white/70"
-              onclick="window.open('https://edtech.chatbotsafrica.com/?q=What%20challenges%20does%20it%20address%3F','_blank')"
+              onclick="openChatModal('What challenges does it address?')"
             >
               What challenges are addressed?
             </button>
@@ -560,7 +560,7 @@
             <button
               id="openChat"
               class="px-8 py-3 rounded-full bg-orange-500 text-white font-semibold shadow-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 transition"
-              onclick="window.open('https://edtech.chatbotsafrica.com/', '_blank')"
+              onclick="openChatModal()"
             >
               Start Chat
             </button>
@@ -568,6 +568,619 @@
         </div>
       </div>
     </section>
+
+    <!-- Embedded Chatbot Modal with Feedback Panel -->
+    <div id="chatModal" class="chat-modal-overlay" style="display: none;">
+      <div class="chat-modal-wrapper">
+        <!-- Main Chat Container -->
+        <div class="chat-modal-container">
+          <div class="chat-modal-header">
+            <h3>EdTech Strategy Bot</h3>
+            <div class="chat-header-actions">
+              <button class="chat-feedback-toggle" onclick="toggleFeedbackPanel()" aria-label="Toggle feedback panel" title="Share feedback">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <button class="chat-modal-close" onclick="closeChatModal()" aria-label="Close chat">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="chat-modal-body">
+            <iframe 
+              id="chatIframe"
+              src="" 
+              title="EdTech Strategy Chatbot"
+              allow="microphone"
+            ></iframe>
+            <div class="chat-iframe-error" id="chatIframeError" style="display: none;">
+              <p>Unable to load chatbot in embedded mode.</p>
+              <p>This may be due to security restrictions on the chatbot site.</p>
+              <button onclick="window.open('https://edtech.chatbotsafrica.com/', '_blank'); closeChatModal();" class="chat-fallback-btn">
+                Open in New Tab Instead
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback Side Panel -->
+        <div class="chat-feedback-panel" id="chatFeedbackPanel">
+          <div class="feedback-panel-header">
+            <h4>Share Your Feedback</h4>
+            <button class="feedback-panel-close" onclick="toggleFeedbackPanel()" aria-label="Close feedback">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="feedback-panel-body">
+            <p class="feedback-panel-desc">How's your experience with the chatbot? Your feedback helps us improve.</p>
+            
+            <form id="chatFeedbackForm" class="chat-feedback-form">
+              <div class="feedback-form-field">
+                <label for="chatFeedbackRating">How helpful was the bot?</label>
+                <div class="feedback-rating-buttons">
+                  <button type="button" class="rating-btn" data-rating="very_satisfied" title="Very Helpful">😊</button>
+                  <button type="button" class="rating-btn" data-rating="satisfied" title="Helpful">🙂</button>
+                  <button type="button" class="rating-btn" data-rating="neutral" title="Neutral">😐</button>
+                  <button type="button" class="rating-btn" data-rating="dissatisfied" title="Not Helpful">😕</button>
+                  <button type="button" class="rating-btn" data-rating="very_dissatisfied" title="Very Unhelpful">😞</button>
+                </div>
+                <input type="hidden" id="chatFeedbackRating" name="rating" value="">
+              </div>
+              
+              <div class="feedback-form-field">
+                <label for="chatFeedbackComment">Your feedback (optional)</label>
+                <textarea 
+                  id="chatFeedbackComment" 
+                  name="comment" 
+                  placeholder="What did you like or what could be better?"
+                  rows="4"
+                ></textarea>
+              </div>
+              
+              <button type="submit" class="feedback-submit-btn" id="chatFeedbackSubmit">
+                Send Feedback
+              </button>
+            </form>
+            
+            <div id="chatFeedbackStatus" class="feedback-status-msg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .chat-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        animation: fadeIn 0.2s ease;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .chat-modal-wrapper {
+        display: flex;
+        gap: 1rem;
+        max-width: 900px;
+        width: 100%;
+        height: 80vh;
+        max-height: 700px;
+      }
+      .chat-modal-container {
+        background: white;
+        border-radius: 16px;
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        animation: slideUp 0.3s ease;
+      }
+      @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      .chat-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: white;
+      }
+      .chat-modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      .chat-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .chat-feedback-toggle {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        border-radius: 8px;
+        padding: 6px;
+        cursor: pointer;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .chat-feedback-toggle:hover {
+        background: rgba(255,255,255,0.3);
+      }
+      .chat-feedback-toggle.active {
+        background: rgba(255,255,255,0.4);
+      }
+      .chat-modal-close {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        border-radius: 8px;
+        padding: 6px;
+        cursor: pointer;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .chat-modal-close:hover {
+        background: rgba(255,255,255,0.3);
+      }
+      .chat-modal-body {
+        flex: 1;
+        position: relative;
+        background: #f9fafb;
+      }
+      .chat-modal-body iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .chat-iframe-error {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+        background: #f9fafb;
+      }
+      .chat-iframe-error p {
+        color: #6b7280;
+        margin: 0.5rem 0;
+      }
+      .chat-fallback-btn {
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background: #f97316;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .chat-fallback-btn:hover {
+        background: #ea580c;
+      }
+
+      /* Feedback Side Panel */
+      .chat-feedback-panel {
+        width: 320px;
+        background: white;
+        border-radius: 16px;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        animation: slideIn 0.3s ease;
+      }
+      .chat-feedback-panel.open {
+        display: flex;
+      }
+      @keyframes slideIn {
+        from { transform: translateX(20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      .feedback-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        background: #1f2937;
+        color: white;
+      }
+      .feedback-panel-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .feedback-panel-close {
+        background: rgba(255,255,255,0.1);
+        border: none;
+        border-radius: 6px;
+        padding: 4px;
+        cursor: pointer;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .feedback-panel-close:hover {
+        background: rgba(255,255,255,0.2);
+      }
+      .feedback-panel-body {
+        flex: 1;
+        padding: 1.25rem;
+        overflow-y: auto;
+      }
+      .feedback-panel-desc {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin: 0 0 1.25rem 0;
+        line-height: 1.5;
+      }
+      .chat-feedback-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .feedback-form-field label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.5rem;
+      }
+      .feedback-rating-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .rating-btn {
+        width: 44px;
+        height: 44px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        background: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .rating-btn:hover {
+        border-color: #f97316;
+        transform: scale(1.1);
+      }
+      .rating-btn.selected {
+        border-color: #f97316;
+        background: #fff7ed;
+        transform: scale(1.1);
+      }
+      .feedback-form-field textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-family: inherit;
+        resize: vertical;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .feedback-form-field textarea:focus {
+        outline: none;
+        border-color: #f97316;
+        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+      }
+      .feedback-submit-btn {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: #f97316;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .feedback-submit-btn:hover {
+        background: #ea580c;
+      }
+      .feedback-submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .feedback-status-msg {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        text-align: center;
+        display: none;
+      }
+      .feedback-status-msg.success {
+        display: block;
+        background: #ecfdf5;
+        color: #059669;
+      }
+      .feedback-status-msg.error {
+        display: block;
+        background: #fef2f2;
+        color: #dc2626;
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .chat-modal-wrapper {
+          flex-direction: column;
+          height: 90vh;
+          max-height: none;
+        }
+        .chat-modal-container {
+          flex: 1;
+          min-height: 50%;
+          border-radius: 12px;
+        }
+        .chat-feedback-panel {
+          width: 100%;
+          max-height: 45%;
+          border-radius: 12px;
+        }
+        .chat-feedback-toggle {
+          display: flex;
+        }
+      }
+      @media (max-width: 640px) {
+        .chat-modal-wrapper {
+          padding: 0;
+          gap: 0.5rem;
+        }
+        .feedback-rating-buttons {
+          justify-content: space-between;
+        }
+        .rating-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+
+    <script>
+      function openChatModal(query) {
+        const modal = document.getElementById('chatModal');
+        const iframe = document.getElementById('chatIframe');
+        const errorDiv = document.getElementById('chatIframeError');
+        const feedbackPanel = document.getElementById('chatFeedbackPanel');
+        const toggleBtn = document.querySelector('.chat-feedback-toggle');
+        
+        // Build URL with optional query
+        let chatUrl = 'https://edtech.chatbotsafrica.com/';
+        if (query) {
+          chatUrl += '?q=' + encodeURIComponent(query);
+        }
+        
+        // Reset state
+        errorDiv.style.display = 'none';
+        iframe.style.display = 'block';
+        
+        // Set iframe src
+        iframe.src = chatUrl;
+        
+        // Show modal
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Auto-open feedback panel alongside chat
+        feedbackPanel.classList.add('open');
+        toggleBtn?.classList.add('active');
+        
+        // Check if iframe loads (basic error detection)
+        iframe.onerror = function() {
+          iframe.style.display = 'none';
+          errorDiv.style.display = 'flex';
+        };
+        
+        // Timeout fallback - if iframe doesn't seem to load content
+        setTimeout(function() {
+          try {
+            // This will throw if cross-origin and blocked
+            if (iframe.contentWindow.document) {
+              // Loaded successfully
+            }
+          } catch(e) {
+            // Cross-origin - can't check, assume it's working if no error shown
+          }
+        }, 3000);
+      }
+      
+      function closeChatModal() {
+        const modal = document.getElementById('chatModal');
+        const iframe = document.getElementById('chatIframe');
+        const feedbackPanel = document.getElementById('chatFeedbackPanel');
+        
+        modal.style.display = 'none';
+        iframe.src = ''; // Clear iframe
+        document.body.style.overflow = '';
+        
+        // Close feedback panel too
+        feedbackPanel.classList.remove('open');
+        document.querySelector('.chat-feedback-toggle')?.classList.remove('active');
+        
+        // Reset feedback form
+        resetFeedbackForm();
+      }
+      
+      function toggleFeedbackPanel() {
+        const panel = document.getElementById('chatFeedbackPanel');
+        const toggleBtn = document.querySelector('.chat-feedback-toggle');
+        
+        panel.classList.toggle('open');
+        toggleBtn?.classList.toggle('active');
+      }
+      
+      function resetFeedbackForm() {
+        const form = document.getElementById('chatFeedbackForm');
+        const statusMsg = document.getElementById('chatFeedbackStatus');
+        const ratingInput = document.getElementById('chatFeedbackRating');
+        
+        form?.reset();
+        if (ratingInput) ratingInput.value = '';
+        if (statusMsg) {
+          statusMsg.className = 'feedback-status-msg';
+          statusMsg.textContent = '';
+        }
+        
+        // Clear selected rating buttons
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+          btn.classList.remove('selected');
+        });
+      }
+      
+      // Rating button selection
+      document.querySelectorAll('.rating-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Remove selected from all
+          document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+          // Add selected to clicked
+          this.classList.add('selected');
+          // Set hidden input value
+          document.getElementById('chatFeedbackRating').value = this.dataset.rating;
+        });
+      });
+      
+      // Feedback form submission
+      document.getElementById('chatFeedbackForm')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const rating = document.getElementById('chatFeedbackRating').value;
+        const comment = document.getElementById('chatFeedbackComment').value.trim();
+        const submitBtn = document.getElementById('chatFeedbackSubmit');
+        const statusMsg = document.getElementById('chatFeedbackStatus');
+        
+        // Require at least rating or comment
+        if (!rating && !comment) {
+          statusMsg.textContent = 'Please select a rating or enter feedback.';
+          statusMsg.className = 'feedback-status-msg error';
+          return;
+        }
+        
+        // Disable button while submitting
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        // Map rating to backend format
+        const ratingMap = {
+          "very_satisfied": "very satisfied",
+          "satisfied": "satisfied",
+          "neutral": "neutral",
+          "dissatisfied": "dissatisfied",
+          "very_dissatisfied": "very dissatisfied"
+        };
+        
+        // Generate device ID
+        let deviceId = localStorage.getItem('edtech-device-id');
+        if (!deviceId) {
+          deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
+          localStorage.setItem('edtech-device-id', deviceId);
+        }
+        
+        try {
+          const response = await fetch('https://edudoc-610o.onrender.com/api/feedback/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              device_id: deviceId,
+              feedback: comment || 'Chatbot feedback: ' + (ratingMap[rating] || rating),
+              rating: rating ? ratingMap[rating] : 'neutral',
+              source: 'chatbot'
+            })
+          });
+          
+          if (response.ok) {
+            statusMsg.textContent = 'Thanks for your feedback!';
+            statusMsg.className = 'feedback-status-msg success';
+            
+            // Reset form after delay
+            setTimeout(() => {
+              resetFeedbackForm();
+            }, 2000);
+          } else {
+            throw new Error('Server error');
+          }
+        } catch (error) {
+          console.error('Feedback submission error:', error);
+          // Save locally as fallback
+          try {
+            const entries = JSON.parse(localStorage.getItem('edtech-feedback-entries') || '[]');
+            entries.push({
+              id: 'fb_' + Date.now(),
+              device_id: deviceId,
+              rating: rating,
+              comment: comment,
+              source: 'chatbot',
+              timestamp: new Date().toISOString(),
+              synced: false
+            });
+            localStorage.setItem('edtech-feedback-entries', JSON.stringify(entries));
+          } catch(e) {}
+          
+          statusMsg.textContent = 'Thanks! Feedback saved.';
+          statusMsg.className = 'feedback-status-msg success';
+          
+          setTimeout(() => {
+            resetFeedbackForm();
+          }, 2000);
+        }
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Feedback';
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeChatModal();
+        }
+      });
+      
+      // Close on overlay click
+      document.getElementById('chatModal')?.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeChatModal();
+        }
+      });
+    </script>
 
     <!-- Feedback Section -->
     <section

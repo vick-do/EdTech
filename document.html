@@ -1697,7 +1697,8 @@
               body: JSON.stringify({
                 device_id: entry.device_id,
                 feedback: entry.comment,
-                rating: rating ? ratingMap[rating] : "neutral"
+                rating: rating ? ratingMap[rating] : "neutral",
+                source: "document"
               })
             });
 
