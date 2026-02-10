@@ -1,18 +1,33 @@
 // API Service for FeedbackOS Dashboard
 class FeedbackAPI {
-    constructor(baseURL = 'http://localhost:5000/api/feedback') {
+    constructor(baseURL = 'https://edudoc-610o.onrender.com/api/feedback') {
         this.baseURL = baseURL;
     }
 
+    getToken() {
+        return localStorage.getItem('dashboard_token');
+    }
+
     async request(endpoint, options = {}) {
+        const token = this.getToken();
+        
         try {
             const response = await fetch(`${this.baseURL}${endpoint}`, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token ? `Bearer ${token}` : '',
                     ...options.headers
                 },
                 ...options
             });
+
+            if (response.status === 401) {
+                // Token expired or invalid - redirect to login
+                localStorage.removeItem('dashboard_token');
+                localStorage.removeItem('dashboard_admin');
+                window.location.href = 'login.html';
+                return;
+            }
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -40,6 +55,11 @@ class FeedbackAPI {
         return this.request(`/volume-trend?days=${days}`);
     }
 
+    // Source Distribution (Chatbot vs Document)
+    async getSourceDistribution() {
+        return this.request('/source-distribution');
+    }
+
     // Recent Feedback for Dashboard Table
     async getRecentFeedback(limit = 5) {
         return this.request(`/recent?limit=${limit}`);
@@ -47,11 +67,15 @@ class FeedbackAPI {
 
     // All Feedback with Pagination and Filtering
     async getAllFeedback(params = {}) {
-        const queryString = new URLSearchParams(params).toString();
+        // Filter out empty values to avoid sending empty query params
+        const filteredParams = Object.fromEntries(
+            Object.entries(params).filter(([_, v]) => v !== '' && v !== null && v !== undefined)
+        );
+        const queryString = new URLSearchParams(filteredParams).toString();
         return this.request(`/?${queryString}`);
     }
 
-    // Submit New Feedback
+    // Submit New Feedback (public - no auth needed)
     async submitFeedback(feedbackData) {
         return this.request('/submit', {
             method: 'POST',
