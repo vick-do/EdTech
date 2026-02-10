@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FeedbackOS Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "primary-light": "#5c91f5",
+                        "primary-dark": "#0a3a9e",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2233",
+                        "text-main-light": "#1f2937",
+                        "text-main-dark": "#e5e7eb",
+                        "text-muted-light": "#6b7280",
+                        "text-muted-dark": "#9ca3af",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+        }
+        
+        /* Chart Styles */
+        .chart-grid {
+            stroke: #e2e8f0;
+            stroke-dasharray: 4, 4;
+        }
+        .dark .chart-grid {
+            stroke: #374151;
+        }
+        .chart-line {
+            fill: none;
+            stroke: #135bec;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .chart-area {
+            fill: url(#gradientPrimary);
+            opacity: 0.2;
+        }
+        
+        /* Donut Chart */
+        .donut-segment {
+            fill: none;
+            stroke-width: 20;
+        }
+        .donut-bg {
+            stroke: #f3f4f6;
+        }
+        .dark .donut-bg {
+            stroke: #374151;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main-light dark:text-text-main-dark transition-colors duration-200 antialiased overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-800 flex flex-col h-full flex-shrink-0 z-20 shadow-sm">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-lg">
+                F
+            </div>
+<span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">FeedbackOS</span>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+<a id="overview-nav" class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg bg-primary/10 text-primary dark:text-primary-light group transition-colors cursor-pointer">
+<span class="material-icons text-[20px]">dashboard</span>
+                Overview
+            </a>
+<a id="feedback-nav" class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white group transition-colors cursor-pointer">
+<span class="material-icons text-[20px]">chat_bubble_outline</span>
+                Feedback
+                <span class="ml-auto bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2 rounded-full text-xs font-semibold">12</span>
+</a>
+
+</nav>
+<div class="p-4 border-t border-gray-200 dark:border-gray-800">
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 group transition-colors" href="#">
+<span class="material-icons text-[20px]">logout</span>
+                Logout
+            </a>
+<div class="mt-4 flex items-center gap-3 px-4 pt-2">
+<img alt="Profile picture of logged in user" class="h-8 w-8 rounded-full bg-gray-300 object-cover ring-2 ring-white dark:ring-gray-800" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuQbTlxloF3pAQQivQyvv3TOxVXGEp5LFAs8zfCmDJ075MDbU4IBC0As4VCs4ZS6jFVefP1vp6oiQgjIPzsEJogkTYQCwCcFF5MSyr_X6-2s5ZFf4aVm_p2DMZVf7l-M6nCL6jm2PtHhsnMEzKzg2ZBZ525SEc4Vo0RHq6kwV0hX7Enp2XUTC4s9pPs0qgiPvZKCqd8EsLFQjruqF2F7-6627-muoDPzsXUE79KENARRIWnMkn2orCtcx4HznFjr6SYJ0lqq-i6Ies"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-gray-900 dark:text-white truncate">Tom Cook</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">Admin</p>
+</div>
+</div>
+</div>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto relative h-full">
+<!-- Overview Screen -->
+<div id="overview-screen" class="screen">
+<!-- Top Bar -->
+<header class="bg-surface-light dark:bg-surface-dark/90 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800 px-8 py-5 flex items-center justify-between">
+<div>
+<h1 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard Overview</h1>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-1">Monitoring metrics for active projects</p>
+</div>
+<div class="flex items-center gap-4">
+<!-- Date Range Selector -->
+<div class="relative group">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm">
+<span class="material-icons text-gray-400 text-lg">calendar_today</span>
+<span>Last 30 Days</span>
+<span class="material-icons text-gray-400 text-lg ml-2">expand_more</span>
+</button>
+</div>
+<button class="p-2 text-gray-400 hover:text-primary transition-colors relative">
+<span class="material-icons">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></span>
+</button>
+</div>
+</header>
+<!-- Content Body -->
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- KPI Cards Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- KPI 1 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1">Total Feedback</p>
+<h3 class="text-3xl font-bold text-gray-900 dark:text-white" data-kpi="total-feedback">1,248</h3>
+</div>
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-icons text-primary">reviews</span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-sm">
+<span class="text-green-600 dark:text-green-400 flex items-center font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
+<span class="material-icons text-sm mr-1">trending_up</span>
+                            <span data-kpi="feedback-growth"></span>+12.5%</span>
+                        </span>
+<span class="text-gray-500 ml-2">vs last month</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1">Active Sessions Today</p>
+<h3 class="text-3xl font-bold text-gray-900 dark:text-white" data-kpi="active-sessions">86</h3>
+</div>
+<div class="p-2 bg-purple-500/10 rounded-lg">
+<span class="material-icons text-purple-600 dark:text-purple-400">group</span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-sm">
+<span class="text-green-600 dark:text-green-400 flex items-center font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
+<span class="material-icons text-sm mr-1">trending_up</span>
+                            <span data-kpi="session-growth"></span>+3.2%</span>
+                        </span>
+<span class="text-gray-500 ml-2">vs yesterday</span>
+</div>
+</div>
+</div>
+<!-- Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Donut Chart -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Ratings Distribution</h3>
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-icons text-sm">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 flex items-center justify-center relative">
+<!-- SVG Donut Chart -->
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background Circle -->
+<circle class="donut-bg" cx="50" cy="50" fill="transparent" r="40"></circle>
+<!-- Satisfied (65%) -->
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="transparent" r="40" stroke="#135bec" stroke-dasharray="251.2" stroke-dashoffset="87.92" stroke-width="12"></circle>
+<!-- Neutral (25%) -->
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="transparent" r="40" stroke="#93c5fd" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="12" style="transform-origin: center; transform: rotate(234deg);"></circle>
+<!-- Dissatisfied (10%) -->
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="transparent" r="40" stroke="#e2e8f0" stroke-dasharray="251.2" stroke-dashoffset="226.08" stroke-width="12" style="transform-origin: center; transform: rotate(324deg);"></circle>
+</svg>
+<!-- Center Text -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="text-2xl font-bold text-gray-900 dark:text-white" data-avg="score">4.2</span>
+<span class="text-xs text-gray-500 font-medium uppercase tracking-wider">Avg Score</span>
+</div>
+</div>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-gray-600 dark:text-gray-300">Satisfied</span>
+</div>
+<span class="font-semibold text-gray-900 dark:text-white" data-rating="satisfied">65%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-blue-300"></span>
+<span class="text-gray-600 dark:text-gray-300">Neutral</span>
+</div>
+<span class="font-semibold text-gray-900 dark:text-white" data-rating="neutral">25%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-gray-200 dark:bg-gray-700"></span>
+<span class="text-gray-600 dark:text-gray-300">Dissatisfied</span>
+</div>
+<span class="font-semibold text-gray-900 dark:text-white" data-rating="dissatisfied">10%</span>
+</div>
+</div>
+</div>
+<!-- Line Chart -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm lg:col-span-2 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Feedback Volume Trend</h3>
+<p class="text-xs text-text-muted-light dark:text-text-muted-dark">Daily submissions over time</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 text-xs font-medium rounded-md bg-primary text-white">Daily</button>
+<button class="px-3 py-1 text-xs font-medium rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-400">Weekly</button>
+</div>
+</div>
+<div class="flex-1 w-full relative min-h-[250px]">
+<svg class="w-full h-full overflow-visible preserve-3d" viewbox="0 0 800 300">
+<defs>
+<lineargradient id="gradientPrimary" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#135bec" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#135bec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<g class="chart-grid opacity-30">
+<line x1="0" x2="800" y1="250" y2="250"></line>
+<line x1="0" x2="800" y1="190" y2="190"></line>
+<line x1="0" x2="800" y1="130" y2="130"></line>
+<line x1="0" x2="800" y1="70" y2="70"></line>
+<line x1="0" x2="800" y1="10" y2="10"></line>
+</g>
+<!-- Y-Axis Labels -->
+<g class="text-xs fill-gray-400 dark:fill-gray-500 font-display" text-anchor="end">
+<text x="-10" y="255">0</text>
+<text x="-10" y="195">25</text>
+<text x="-10" y="135">50</text>
+<text x="-10" y="75">75</text>
+<text x="-10" y="15">100</text>
+</g>
+<!-- Area Path -->
+<path class="chart-area" d="M0,200 Q80,180 160,120 T320,100 T480,140 T640,60 T800,90 V250 H0 Z"></path>
+<!-- Line Path -->
+<path class="chart-line" d="M0,200 Q80,180 160,120 T320,100 T480,140 T640,60 T800,90"></path>
+<!-- Data Points (dots) -->
+<circle class="fill-white stroke-primary stroke-2" cx="160" cy="120" r="4"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="320" cy="100" r="4"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="480" cy="140" r="4"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="640" cy="60" r="4"></circle>
+<!-- X-Axis Labels -->
+<g class="text-xs fill-gray-400 dark:fill-gray-500 font-display" text-anchor="middle">
+<text x="0" y="280">Mon</text>
+<text x="160" y="280">Tue</text>
+<text x="320" y="280">Wed</text>
+<text x="480" y="280">Thu</text>
+<text x="640" y="280">Fri</text>
+<text x="800" y="280">Sat</text>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<!-- Recent Activity Table -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Recent Feedback</h3>
+<a class="text-sm text-primary font-medium hover:underline cursor-pointer" id="view-all-feedback">View All</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 text-xs uppercase text-gray-500 font-semibold tracking-wider">
+<th class="px-6 py-3">User</th>
+<th class="px-6 py-3">Rating</th>
+<th class="px-6 py-3">Comment</th>
+<th class="px-6 py-3">Date</th>
+<th class="px-6 py-3 text-right">Status</th>
+</tr>
+</thead>
+<tbody id="recent-feedback-tbody" class="divide-y divide-gray-200 dark:divide-gray-800">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">JD</div>
+<span class="text-sm font-medium text-gray-900 dark:text-white">John Doe</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex text-yellow-400 text-sm">
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-[16px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs">Really loved the new update, much faster!</p>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2 mins ago</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">New</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-xs">AS</div>
+<span class="text-sm font-medium text-gray-900 dark:text-white">Alice Smith</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex text-yellow-400 text-sm">
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-[16px]">star</span>
+<span class="material-icons text-gray-300 dark:text-gray-600 text-[16px]">star</span>
+<span class="material-icons text-gray-300 dark:text-gray-600 text-[16px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs">It's okay, but I can't find the export button.</p>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1 hour ago</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">Reviewed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback Screen -->
+<div id="feedback-screen" class="screen hidden">
+<!-- Top Header -->
+<header class="bg-surface-light dark:bg-surface-dark border-b border-gray-200 dark:border-gray-800 px-8 py-5 flex items-center justify-between">
+<div>
+<h1 class="text-2xl font-bold text-gray-900 dark:text-white">Feedback Records</h1>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-1">Detailed feedback submissions and analytics</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons text-base">file_download</span>
+                    Export CSV
+                </button>
+<button class="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">notifications</span>
+</button>
+</div>
+</header>
+
+<!-- Scrollable Content Area -->
+<div class="p-8 max-w-7xl mx-auto space-y-6">
+<!-- Filters Card -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm p-5">
+<div class="flex flex-col md:flex-row md:items-end gap-4">
+<!-- Search -->
+<div class="flex-1 min-w-[200px]">
+<label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Search</label>
+<div class="relative">
+<span class="material-icons absolute left-3 top-2.5 text-gray-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white" placeholder="Search Session ID or content..." type="text"/>
+</div>
+</div>
+<!-- Date Range -->
+<div class="w-full md:w-64">
+<label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Date Range</label>
+<div class="relative">
+<span class="material-icons absolute left-3 top-2.5 text-gray-400 text-lg">date_range</span>
+<select class="w-full pl-10 pr-8 py-2 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer text-gray-900 dark:text-white">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>This Quarter</option>
+<option>Custom Range</option>
+</select>
+<span class="material-icons absolute right-2 top-2.5 text-gray-400 text-lg pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Rating Filter -->
+<div class="w-full md:w-56">
+<label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Sentiment</label>
+<div class="relative">
+<span class="material-icons absolute left-3 top-2.5 text-gray-400 text-lg">stars</span>
+<select class="w-full pl-10 pr-8 py-2 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer text-gray-900 dark:text-white">
+<option value="all">All Ratings</option>
+<option value="satisfied">Satisfied (4-5 Stars)</option>
+<option value="neutral">Neutral (3 Stars)</option>
+<option value="dissatisfied">Dissatisfied (1-2 Stars)</option>
+</select>
+<span class="material-icons absolute right-2 top-2.5 text-gray-400 text-lg pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-2 mt-2 md:mt-0">
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark shadow-sm shadow-primary/30 transition-all flex items-center gap-2">
+<span class="material-icons text-sm">filter_list</span>
+                                Filter
+                            </button>
+<button class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+                                Reset
+                            </button>
+</div>
+</div>
+</section>
+<!-- Data Table Card -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden flex flex-col">
+<!-- Table Header Actions -->
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<h2 class="text-sm font-semibold text-gray-800 dark:text-gray-200">All Feedback</h2>
+<span class="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-gray-500">1,248</span>
+</div>
+<div class="flex items-center gap-4 text-sm text-gray-500">
+<span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-500"></div> 84% Positive</span>
+</div>
+</div>
+<!-- Responsive Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
+<th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-32">Session ID</th>
+<th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-48">Date & Time</th>
+<th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-32">Messages</th>
+<th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-40">Rating</th>
+<th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Feedback Preview</th>
+<th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-16"></th>
+</tr>
+</thead>
+<tbody id="feedback-table-tbody" class="divide-y divide-gray-100 dark:divide-gray-800">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<a class="text-sm font-medium text-primary hover:text-primary-dark hover:underline" href="#">#SES-8923</a>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm text-gray-900 dark:text-gray-200">Oct 24, 2023</span>
+<span class="text-xs text-gray-500">14:30 PM</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-gray-600 dark:text-gray-400">14 msgs</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+<span class="material-icons text-[14px]">sentiment_satisfied_alt</span>
+                                            Satisfied
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-gray-600 dark:text-gray-300 truncate max-w-xs">
+                                            The agent was very helpful in resolving my billing issue quickly.
+                                        </p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-icons text-xl">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<a class="text-sm font-medium text-primary hover:text-primary-dark hover:underline" href="#">#SES-8924</a>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm text-gray-900 dark:text-gray-200">Oct 24, 2023</span>
+<span class="text-xs text-gray-500">13:15 PM</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-gray-600 dark:text-gray-400">8 msgs</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+<span class="material-icons text-[14px]">sentiment_neutral</span>
+                                            Neutral
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-gray-600 dark:text-gray-300 truncate max-w-xs">
+                                            It was okay, but the response time was a bit slow initially.
+                                        </p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-icons text-xl">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<a class="text-sm font-medium text-primary hover:text-primary-dark hover:underline" href="#">#SES-8925</a>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm text-gray-900 dark:text-gray-200">Oct 23, 2023</span>
+<span class="text-xs text-gray-500">09:45 AM</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-gray-600 dark:text-gray-400">22 msgs</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 border border-rose-200 dark:border-rose-800">
+<span class="material-icons text-[14px]">sentiment_dissatisfied</span>
+                                            Dissatisfied
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-gray-600 dark:text-gray-300 truncate max-w-xs">
+                                            My problem is still not fixed. This is very frustrating.
+                                        </p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-icons text-xl">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between bg-gray-50 dark:bg-gray-900/50">
+<div id="pagination-info" class="text-sm text-gray-500">
+                            Showing <span class="font-medium text-gray-700 dark:text-gray-300">1</span> to <span class="font-medium text-gray-700 dark:text-gray-300">3</span> of <span class="font-medium text-gray-700 dark:text-gray-300">1,248</span> results
+                        </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+                                Previous
+                            </button>
+<button class="px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                                Next
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="mock-api-service.js"></script>
+<script>
+// Navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const overviewNav = document.getElementById('overview-nav');
+    const feedbackNav = document.getElementById('feedback-nav');
+    const viewAllFeedback = document.getElementById('view-all-feedback');
+    
+    const overviewScreen = document.getElementById('overview-screen');
+    const feedbackScreen = document.getElementById('feedback-screen');
+    
+    // Function to show overview screen
+    function showOverview() {
+        overviewScreen.classList.remove('hidden');
+        feedbackScreen.classList.add('hidden');
+        
+        // Update nav styles
+        overviewNav.className = 'nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg bg-primary/10 text-primary dark:text-primary-light group transition-colors cursor-pointer';
+        feedbackNav.className = 'nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white group transition-colors cursor-pointer';
+        
+        // Load overview data
+        loadDashboardData();
+    }
+    
+    // Function to show feedback screen
+    function showFeedback() {
+        overviewScreen.classList.add('hidden');
+        feedbackScreen.classList.remove('hidden');
+        
+        // Update nav styles
+        feedbackNav.className = 'nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg bg-primary/10 text-primary dark:text-primary-light group transition-colors cursor-pointer';
+        overviewNav.className = 'nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white group transition-colors cursor-pointer';
+        
+        // Load feedback data
+        loadFeedbackData();
+    }
+    
+    // Event listeners
+    overviewNav.addEventListener('click', showOverview);
+    feedbackNav.addEventListener('click', showFeedback);
+    viewAllFeedback.addEventListener('click', showFeedback);
+    
+    // Load initial data
+    loadDashboardData();
+    
+    // Dashboard Data Loading Functions
+    async function loadDashboardData() {
+        try {
+            // Load KPI stats
+            const stats = await window.feedbackAPI.getDashboardStats();
+            updateKPICards(stats);
+            
+            // Load ratings distribution
+            const ratings = await window.feedbackAPI.getRatingsDistribution();
+            updateDonutChart(ratings);
+            
+            // Load volume trend
+            const trend = await window.feedbackAPI.getVolumeTrend(7);
+            updateLineChart(trend);
+            
+            // Load recent feedback
+            const recent = await window.feedbackAPI.getRecentFeedback(5);
+            updateRecentFeedbackTable(recent);
+            
+        } catch (error) {
+            console.error('Error loading dashboard data:', error);
+            showErrorMessage('Failed to load dashboard data');
+        }
+    }
+    
+    async function loadFeedbackData() {
+        try {
+            const feedback = await window.feedbackAPI.getAllFeedback({ page: 1, limit: 10 });
+            updateFeedbackTable(feedback);
+        } catch (error) {
+            console.error('Error loading feedback data:', error);
+            showErrorMessage('Failed to load feedback data');
+        }
+    }
+    
+    // Update Functions
+    function updateKPICards(stats) {
+        // Update Total Feedback
+        const totalFeedbackEl = document.querySelector('[data-kpi="total-feedback"]');
+        if (totalFeedbackEl) {
+            totalFeedbackEl.textContent = stats.totalFeedback.toLocaleString();
+        }
+        
+        const feedbackGrowthEl = document.querySelector('[data-kpi="feedback-growth"]');
+        if (feedbackGrowthEl) {
+            feedbackGrowthEl.textContent = stats.feedbackGrowth;
+        }
+        
+        // Update Active Sessions
+        const activeSessionsEl = document.querySelector('[data-kpi="active-sessions"]');
+        if (activeSessionsEl) {
+            activeSessionsEl.textContent = stats.activeSessions;
+        }
+        
+        const sessionGrowthEl = document.querySelector('[data-kpi="session-growth"]');
+        if (sessionGrowthEl) {
+            sessionGrowthEl.textContent = stats.sessionGrowth;
+        }
+    }
+    
+    function updateDonutChart(ratings) {
+        // Update percentages in legend
+        const satisfiedEl = document.querySelector('[data-rating="satisfied"]');
+        if (satisfiedEl) satisfiedEl.textContent = `${ratings.satisfied}%`;
+        
+        const neutralEl = document.querySelector('[data-rating="neutral"]');
+        if (neutralEl) neutralEl.textContent = `${ratings.neutral}%`;
+        
+        const dissatisfiedEl = document.querySelector('[data-rating="dissatisfied"]');
+        if (dissatisfiedEl) dissatisfiedEl.textContent = `${ratings.dissatisfied}%`;
+        
+        // Update average score
+        const avgScoreEl = document.querySelector('[data-avg="score"]');
+        if (avgScoreEl) avgScoreEl.textContent = ratings.averageScore;
+    }
+    
+    function updateLineChart(trend) {
+        // For now, just log the data - chart update would require more complex SVG manipulation
+        console.log('Volume trend data:', trend);
+    }
+    
+    function updateRecentFeedbackTable(recent) {
+        const tbody = document.querySelector('#recent-feedback-tbody');
+        if (!tbody) return;
+        
+        tbody.innerHTML = recent.map(item => `
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center gap-3">
+                        <div class="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">
+                            ${item.user.slice(-2)}
+                        </div>
+                        <span class="text-sm font-medium text-gray-900 dark:text-white">${item.user}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex text-yellow-400 text-sm">
+                        ${generateStarRating(item.rating)}
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <p class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs">${item.comment}</p>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.date}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">${item.status}</span>
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    function updateFeedbackTable(feedbackData) {
+        const tbody = document.querySelector('#feedback-table-tbody');
+        if (!tbody) return;
+        
+        tbody.innerHTML = feedbackData.feedback.map(item => `
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+                <td class="px-6 py-4">
+                    <a class="text-sm font-medium text-primary hover:text-primary-dark hover:underline" href="#">
+                        #${item.sessionId.slice(-6)}
+                    </a>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex flex-col">
+                        <span class="text-sm text-gray-900 dark:text-gray-200">
+                            ${new Date(item.createdAt).toLocaleDateString()}
+                        </span>
+                        <span class="text-xs text-gray-500">
+                            ${new Date(item.createdAt).toLocaleTimeString()}
+                        </span>
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">${item.messageCount} msgs</span>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-${item.rating.color}-100 text-${item.rating.color}-700 dark:bg-${item.rating.color}-900/30 dark:text-${item.rating.color}-400 border border-${item.rating.color}-200 dark:border-${item.rating.color}-800">
+                        <span class="material-icons text-[14px]">${item.rating.icon}</span>
+                        ${item.rating.label}
+                    </span>
+                </td>
+                <td class="px-6 py-4">
+                    <p class="text-sm text-gray-600 dark:text-gray-300 truncate max-w-xs">
+                        ${item.feedback.length > 60 ? item.feedback.substring(0, 60) + '...' : item.feedback}
+                    </p>
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <button class="text-gray-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+                        <span class="material-icons text-xl">visibility</span>
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+        
+        // Update pagination info
+        const paginationInfo = document.querySelector('#pagination-info');
+        if (paginationInfo) {
+            const { currentPage, totalPages, totalItems, itemsPerPage } = feedbackData.pagination;
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, totalItems);
+            
+            paginationInfo.innerHTML = `
+                Showing <span class="font-medium text-gray-700 dark:text-gray-300">${start}</span> to 
+                <span class="font-medium text-gray-700 dark:text-gray-300">${end}</span> of 
+                <span class="font-medium text-gray-700 dark:text-gray-300">${totalItems}</span> results
+            `;
+        }
+    }
+    
+    // Helper Functions
+    function generateStarRating(rating) {
+        const stars = [];
+        const maxStars = 5;
+        let filledStars = 0;
+        
+        // Map rating to star count
+        switch (rating.label) {
+            case 'Satisfied': filledStars = 5; break;
+            case 'Neutral': filledStars = 3; break;
+            case 'Dissatisfied': filledStars = 1; break;
+            default: filledStars = 3;
+        }
+        
+        for (let i = 1; i <= maxStars; i++) {
+            if (i <= filledStars) {
+                stars.push('<span class="material-icons text-[16px]">star</span>');
+            } else {
+                stars.push('<span class="material-icons text-gray-300 dark:text-gray-600 text-[16px]">star</span>');
+            }
+        }
+        
+        return stars.join('');
+    }
+    
+    function showErrorMessage(message) {
+        console.error(message);
+        // You could add a toast notification here
+    }
+});
+</script>
+
+</body>
+</html>

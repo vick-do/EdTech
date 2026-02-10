@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .result { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+        button { padding: 8px 16px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>FeedbackOS API Test</h1>
+    
+    <div class="test-section">
+        <h3>1. Dashboard Statistics</h3>
+        <button onclick="testDashboardStats()">Test Dashboard Stats</button>
+        <div id="stats-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Ratings Distribution</h3>
+        <button onclick="testRatingsDistribution()">Test Ratings Distribution</button>
+        <div id="ratings-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Volume Trend</h3>
+        <button onclick="testVolumeTrend()">Test Volume Trend</button>
+        <div id="trend-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. Recent Feedback</h3>
+        <button onclick="testRecentFeedback()">Test Recent Feedback</button>
+        <div id="recent-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>5. All Feedback</h3>
+        <button onclick="testAllFeedback()">Test All Feedback</button>
+        <div id="all-result" class="result"></div>
+    </div>
+
+    <script src="api-service.js"></script>
+    <script>
+        async function testDashboardStats() {
+            const resultDiv = document.getElementById('stats-result');
+            try {
+                const stats = await window.feedbackAPI.getDashboardStats();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `<pre>${JSON.stringify(stats, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testRatingsDistribution() {
+            const resultDiv = document.getElementById('ratings-result');
+            try {
+                const ratings = await window.feedbackAPI.getRatingsDistribution();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `<pre>${JSON.stringify(ratings, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testVolumeTrend() {
+            const resultDiv = document.getElementById('trend-result');
+            try {
+                const trend = await window.feedbackAPI.getVolumeTrend(7);
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `<pre>${JSON.stringify(trend, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testRecentFeedback() {
+            const resultDiv = document.getElementById('recent-result');
+            try {
+                const recent = await window.feedbackAPI.getRecentFeedback(5);
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `<pre>${JSON.stringify(recent, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testAllFeedback() {
+            const resultDiv = document.getElementById('all-result');
+            try {
+                const feedback = await window.feedbackAPI.getAllFeedback({ page: 1, limit: 5 });
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `<pre>${JSON.stringify(feedback, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
