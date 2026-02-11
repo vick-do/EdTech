@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Responsive Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .test-frame {
+            border: 2px solid #ccc;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .test-label {
+            background: #f0f0f0;
+            padding: 10px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            display: block;
+        }
+        .mobile-frame iframe {
+            height: 600px;
+        }
+        .tablet-frame iframe {
+            height: 700px;
+        }
+        .desktop-frame iframe {
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Responsive Test</h1>
+    <p>This page tests the dashboard at different screen sizes to verify responsive behavior.</p>
+    
+    <div class="test-frame mobile-frame" style="width: 375px;">
+        <div class="test-label">Mobile View (375px)</div>
+        <iframe src="dashboard.html"></iframe>
+    </div>
+    
+    <div class="test-frame tablet-frame" style="width: 768px;">
+        <div class="test-label">Tablet View (768px)</div>
+        <iframe src="dashboard.html"></iframe>
+    </div>
+    
+    <div class="test-frame desktop-frame" style="width: 1200px;">
+        <div class="test-label">Desktop View (1200px)</div>
+        <iframe src="dashboard.html"></iframe>
+    </div>
+    
+    <h2>Key Responsive Features Implemented:</h2>
+    <ul>
+        <li><strong>Mobile Menu:</strong> Hamburger menu button appears on screens < 1024px</li>
+        <li><strong>Collapsible Sidebar:</strong> Sidebar slides in/out on mobile with overlay</li>
+        <li><strong>Responsive Grid:</strong> KPI cards stack on mobile, charts adapt to smaller screens</li>
+        <li><strong>Table Optimization:</strong> Tables scroll horizontally on mobile, some columns hidden</li>
+        <li><strong>Flexible Padding:</strong> Reduced padding on mobile for better space utilization</li>
+        <li><strong>Button Text:</strong> Some button text hidden on mobile to save space</li>
+        <li><strong>Typography:</strong> Smaller headings and hidden descriptions on mobile</li>
+    </ul>
+    
+    <h2>Testing Instructions:</h2>
+    <ol>
+        <li>Check that the mobile menu button appears in the mobile view</li>
+        <li>Verify that clicking the menu button opens/closes the sidebar</li>
+        <li>Ensure tables scroll horizontally when content is too wide</li>
+        <li>Confirm that cards and charts stack properly on smaller screens</li>
+        <li>Test that the overlay closes the menu when clicked</li>
+    </ol>
+</body>
+</html>
