@@ -124,6 +124,31 @@
 <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-1">Monitoring metrics for active projects</p>
 </div>
 <div class="flex items-center gap-4">
+<div class="relative">
+<button id="export-menu-btn" class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-lg shadow-sm transition-all">
+<span class="material-icons text-base">picture_as_pdf</span>
+                            Export Reports
+                            <span class="material-icons text-base">expand_more</span>
+</button>
+<div id="export-dropdown" class="hidden absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+<div class="py-2">
+<button id="export-summary-btn" class="w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3">
+<span class="material-icons text-base text-primary">summarize</span>
+<div>
+<div class="font-medium">Dashboard Summary</div>
+<div class="text-xs text-gray-500">KPIs and statistics</div>
+</div>
+</button>
+<button id="export-detailed-btn" class="w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3">
+<span class="material-icons text-base text-primary">description</span>
+<div>
+<div class="font-medium">Detailed Feedback Report</div>
+<div class="text-xs text-gray-500">All individual feedback entries</div>
+</div>
+</button>
+</div>
+</div>
+</div>
 <!-- Date Range Selector removed -->
 </div>
 </header>
@@ -270,6 +295,8 @@
 </div>
 </div>
 </div>
+
+
 <!-- Feedback Screen -->
 <div id="feedback-screen" class="screen hidden">
 <!-- Top Header -->
@@ -278,13 +305,14 @@
 <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Feedback Records</h1>
 <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-1">Detailed feedback submissions and analytics</p>
 </div>
-<div class="flex items-center gap-3">
+<!-- <div class="flex items-center gap-3">
 <button id="export-csv-btn" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
 <span class="material-icons text-base">file_download</span>
-                    Export CSV
+                    <span class="hidden sm:inline"></span>Export CSV</span>
                 </button>
-</div>
+</div> -->
 </header>
+
 
 <!-- Scrollable Content Area -->
 <div class="p-8 max-w-7xl mx-auto space-y-6">
@@ -368,6 +396,8 @@
 </div>
 </div>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="api-service.js"></script>
 <script>
 // Auth check - redirect to login if not authenticated
@@ -705,6 +735,247 @@ document.addEventListener('DOMContentLoaded', function() {
         link.download = `feedback_export_${new Date().toISOString().split('T')[0]}.csv`;
         link.click();
     }
+    
+    // Export Summary PDF
+    async function exportSummaryPDF() {
+        try {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+            let yPosition = 20;
+            
+            // Title
+            pdf.setFontSize(22);
+            pdf.setTextColor(234, 88, 12);
+            pdf.text('EdTech Dashboard Summary', pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 10;
+            
+            // Date
+            pdf.setFontSize(10);
+            pdf.setTextColor(100, 100, 100);
+            pdf.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 15;
+            
+            // Get dashboard stats
+            const stats = await window.feedbackAPI.getDashboardStats();
+            const ratings = await window.feedbackAPI.getRatingsDistribution();
+            const sources = await window.feedbackAPI.getSourceDistribution();
+            
+            // KPI Section
+            pdf.setFontSize(16);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Key Performance Indicators', 15, yPosition);
+            yPosition += 10;
+            
+            pdf.setFontSize(11);
+            pdf.setTextColor(60, 60, 60);
+            pdf.text(`Total Feedback Received: ${stats.totalFeedback}`, 20, yPosition);
+            yPosition += 7;
+            pdf.text(`Active Sessions Today: ${stats.activeSessions}`, 20, yPosition);
+            yPosition += 15;
+            
+            // Ratings Distribution
+            pdf.setFontSize(16);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Ratings Distribution', 15, yPosition);
+            yPosition += 10;
+            
+            pdf.setFontSize(11);
+            pdf.setTextColor(60, 60, 60);
+            pdf.text(`Average Score: ${ratings.averageScore}`, 20, yPosition);
+            yPosition += 7;
+            pdf.text(`Satisfied: ${ratings.satisfied}%`, 20, yPosition);
+            yPosition += 7;
+            pdf.text(`Neutral: ${ratings.neutral}%`, 20, yPosition);
+            yPosition += 7;
+            pdf.text(`Dissatisfied: ${ratings.dissatisfied}%`, 20, yPosition);
+            yPosition += 15;
+            
+            // Source Distribution
+            pdf.setFontSize(16);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Feedback by Source', 15, yPosition);
+            yPosition += 10;
+            
+            pdf.setFontSize(11);
+            pdf.setTextColor(60, 60, 60);
+            pdf.text(`Chatbot Feedback: ${sources.chatbot.count} responses (${sources.chatbot.percent}%)`, 20, yPosition);
+            yPosition += 7;
+            pdf.text(`Document Feedback: ${sources.document.count} responses (${sources.document.percent}%)`, 20, yPosition);
+            yPosition += 15;
+            
+            // Summary insights
+            pdf.setFontSize(16);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Summary Insights', 15, yPosition);
+            yPosition += 10;
+            
+            pdf.setFontSize(10);
+            pdf.setTextColor(60, 60, 60);
+            const insights = [
+                `This report summarizes ${stats.totalFeedback} feedback submissions collected through the EdTech platform.`,
+                `The average satisfaction score is ${ratings.averageScore}, with ${ratings.satisfied}% of users reporting satisfaction.`,
+                `Feedback was collected from both chatbot interactions (${sources.chatbot.percent}%) and document reviews (${sources.document.percent}%).`
+            ];
+            
+            insights.forEach(insight => {
+                const lines = pdf.splitTextToSize(insight, pageWidth - 40);
+                pdf.text(lines, 20, yPosition);
+                yPosition += lines.length * 5 + 3;
+            });
+            
+            // Save PDF
+            pdf.save(`dashboard_summary_${new Date().toISOString().split('T')[0]}.pdf`);
+            
+        } catch (error) {
+            console.error('Error generating summary PDF:', error);
+            alert('Failed to generate summary PDF. Please try again.');
+        }
+    }
+    
+    // Export Detailed Feedback PDF
+    async function exportDetailedPDF() {
+        try {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+            let yPosition = 20;
+            
+            // Title
+            pdf.setFontSize(22);
+            pdf.setTextColor(234, 88, 12);
+            pdf.text('Detailed Feedback Report', pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 10;
+            
+            // Date
+            pdf.setFontSize(10);
+            pdf.setTextColor(100, 100, 100);
+            pdf.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 15;
+            
+            // Fetch all feedback (paginated)
+            let allFeedback = [];
+            let page = 1;
+            let hasMore = true;
+            
+            while (hasMore) {
+                const response = await window.feedbackAPI.getAllFeedback({ page, limit: 50 });
+                allFeedback = allFeedback.concat(response.feedback);
+                hasMore = page < response.pagination.totalPages;
+                page++;
+            }
+            
+            if (allFeedback.length === 0) {
+                pdf.setFontSize(12);
+                pdf.setTextColor(100, 100, 100);
+                pdf.text('No feedback available', pageWidth / 2, yPosition, { align: 'center' });
+            } else {
+                // Summary header
+                pdf.setFontSize(12);
+                pdf.setTextColor(60, 60, 60);
+                pdf.text(`Total Feedback Entries: ${allFeedback.length}`, 15, yPosition);
+                yPosition += 10;
+                
+                // Feedback entries
+                allFeedback.forEach((item, index) => {
+                    // Check if we need a new page
+                    if (yPosition > pageHeight - 40) {
+                        pdf.addPage();
+                        yPosition = 20;
+                    }
+                    
+                    // Entry number
+                    pdf.setFontSize(12);
+                    pdf.setTextColor(234, 88, 12);
+                    pdf.text(`Feedback #${index + 1}`, 15, yPosition);
+                    yPosition += 7;
+                    
+                    // Session ID
+                    pdf.setFontSize(9);
+                    pdf.setTextColor(100, 100, 100);
+                    pdf.text(`Session ID: ${item.sessionId}`, 20, yPosition);
+                    yPosition += 5;
+                    
+                    // Source
+                    const sourceText = item.source === 'chatbot' ? 'Chatbot' : 'Document';
+                    pdf.text(`Source: ${sourceText}`, 20, yPosition);
+                    yPosition += 5;
+                    
+                    // Rating
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(0, 0, 0);
+                    const ratingLabel = item.rating?.label || 'N/A';
+                    let ratingColor = [100, 100, 100];
+                    if (ratingLabel === 'Satisfied') ratingColor = [16, 185, 129];
+                    else if (ratingLabel === 'Neutral') ratingColor = [251, 191, 36];
+                    else if (ratingLabel === 'Dissatisfied') ratingColor = [239, 68, 68];
+                    
+                    pdf.setTextColor(...ratingColor);
+                    pdf.text(`Rating: ${ratingLabel}`, 20, yPosition);
+                    yPosition += 7;
+                    
+                    // Feedback text
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(40, 40, 40);
+                    pdf.text('Feedback:', 20, yPosition);
+                    yPosition += 5;
+                    
+                    const feedbackLines = pdf.splitTextToSize(item.feedback || 'No feedback provided', pageWidth - 45);
+                    pdf.setTextColor(60, 60, 60);
+                    pdf.text(feedbackLines, 25, yPosition);
+                    yPosition += feedbackLines.length * 5 + 5;
+                    
+                    // Timestamp
+                    pdf.setFontSize(8);
+                    pdf.setTextColor(120, 120, 120);
+                    const timestamp = item.createdAt ? new Date(item.createdAt).toLocaleString() : 'N/A';
+                    pdf.text(`Submitted: ${timestamp}`, 20, yPosition);
+                    yPosition += 8;
+                    
+                    // Separator line
+                    pdf.setDrawColor(220, 220, 220);
+                    pdf.line(15, yPosition, pageWidth - 15, yPosition);
+                    yPosition += 8;
+                });
+            }
+            
+            // Save PDF
+            pdf.save(`detailed_feedback_${new Date().toISOString().split('T')[0]}.pdf`);
+            
+        } catch (error) {
+            console.error('Error generating detailed PDF:', error);
+            alert('Failed to generate detailed feedback PDF. Please try again.');
+        }
+    }
+    
+    // Toggle export dropdown
+    document.getElementById('export-menu-btn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = document.getElementById('export-dropdown');
+        dropdown.classList.toggle('hidden');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        const dropdown = document.getElementById('export-dropdown');
+        const menuBtn = document.getElementById('export-menu-btn');
+        if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+    
+    // Add event listeners for export buttons
+    document.getElementById('export-summary-btn')?.addEventListener('click', () => {
+        document.getElementById('export-dropdown').classList.add('hidden');
+        exportSummaryPDF();
+    });
+    
+    document.getElementById('export-detailed-btn')?.addEventListener('click', () => {
+        document.getElementById('export-dropdown').classList.add('hidden');
+        exportDetailedPDF();
+    });
     
     // Helper Functions
     function generateStarRating(rating) {
