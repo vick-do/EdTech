@@ -613,28 +613,6 @@
             <h3>EdTech Strategy Bot</h3>
             <div class="chat-header-actions">
               <button
-                class="chat-feedback-toggle"
-                onclick="toggleFeedbackPanel()"
-                aria-label="Toggle feedback panel"
-                title="Share feedback"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                  ></path>
-                </svg>
-              </button>
-              <button
                 class="chat-modal-close"
                 onclick="closeChatModal()"
                 aria-label="Close chat"
@@ -685,112 +663,7 @@
           </div>
         </div>
 
-        <!-- Feedback Side Panel -->
-        <div class="chat-feedback-panel" id="chatFeedbackPanel">
-          <div class="feedback-panel-header">
-            <h4>Share Your Feedback</h4>
-            <button
-              class="feedback-panel-close"
-              onclick="toggleFeedbackPanel()"
-              aria-label="Close feedback"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-          <div class="feedback-panel-body">
-            <p class="feedback-panel-desc">
-              How's your experience with the chatbot? Your feedback helps us
-              improve.
-            </p>
-
-            <form id="chatFeedbackForm" class="chat-feedback-form">
-              <div class="feedback-form-field">
-                <label for="chatFeedbackRating">How helpful was the bot?</label>
-                <div class="feedback-rating-buttons">
-                  <button
-                    type="button"
-                    class="rating-btn"
-                    data-rating="very_satisfied"
-                    title="Very Satisfied"
-                  >
-                    😊
-                  </button>
-                  <button
-                    type="button"
-                    class="rating-btn"
-                    data-rating="satisfied"
-                    title="Satisfied"
-                  >
-                    🙂
-                  </button>
-                  <button
-                    type="button"
-                    class="rating-btn"
-                    data-rating="neutral"
-                    title="Neutral"
-                  >
-                    😐
-                  </button>
-                  <button
-                    type="button"
-                    class="rating-btn"
-                    data-rating="dissatisfied"
-                    title="Dissatisfied"
-                  >
-                    😕
-                  </button>
-                  <button
-                    type="button"
-                    class="rating-btn"
-                    data-rating="very_dissatisfied"
-                    title="Very Dissatisfied"
-                  >
-                    😞
-                  </button>
-                </div>
-                <input
-                  type="hidden"
-                  id="chatFeedbackRating"
-                  name="rating"
-                  value=""
-                />
-              </div>
-
-              <div class="feedback-form-field">
-                <label for="chatFeedbackComment"
-                  >Your feedback (optional)</label
-                >
-                <textarea
-                  id="chatFeedbackComment"
-                  name="comment"
-                  placeholder="What did you like or what could be better?"
-                  rows="4"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="feedback-submit-btn"
-                id="chatFeedbackSubmit"
-              >
-                Send Feedback
-              </button>
-            </form>
-
-            <div id="chatFeedbackStatus" class="feedback-status-msg"></div>
-          </div>
-        </div>
+        <!-- Feedback panel removed - read-only mode -->
       </div>
     </div>
 
@@ -940,161 +813,7 @@
         background: #ea580c;
       }
 
-      /* Feedback Side Panel */
-      .chat-feedback-panel {
-        width: 320px;
-        background: white;
-        border-radius: 16px;
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        animation: slideIn 0.3s ease;
-      }
-      .chat-feedback-panel.open {
-        display: flex;
-      }
-      @keyframes slideIn {
-        from {
-          transform: translateX(20px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-      .feedback-panel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 1.25rem;
-        background: #1f2937;
-        color: white;
-      }
-      .feedback-panel-header h4 {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      .feedback-panel-close {
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        border-radius: 6px;
-        padding: 4px;
-        cursor: pointer;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-      }
-      .feedback-panel-close:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-      .feedback-panel-body {
-        flex: 1;
-        padding: 1.25rem;
-        overflow-y: auto;
-      }
-      .feedback-panel-desc {
-        font-size: 0.875rem;
-        color: #6b7280;
-        margin: 0 0 1.25rem 0;
-        line-height: 1.5;
-      }
-      .chat-feedback-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .feedback-form-field label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #374151;
-        margin-bottom: 0.5rem;
-      }
-      .feedback-rating-buttons {
-        display: flex;
-        gap: 0.5rem;
-      }
-      .rating-btn {
-        width: 44px;
-        height: 44px;
-        border: 2px solid #e5e7eb;
-        border-radius: 10px;
-        background: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .rating-btn:hover {
-        border-color: #f97316;
-        transform: scale(1.1);
-      }
-      .rating-btn.selected {
-        border-color: #f97316;
-        background: #fff7ed;
-        transform: scale(1.1);
-      }
-      .feedback-form-field textarea {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        font-size: 0.875rem;
-        font-family: inherit;
-        resize: vertical;
-        transition:
-          border-color 0.2s,
-          box-shadow 0.2s;
-      }
-      .feedback-form-field textarea:focus {
-        outline: none;
-        border-color: #f97316;
-        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-      }
-      .feedback-submit-btn {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        background: #f97316;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      .feedback-submit-btn:hover {
-        background: #ea580c;
-      }
-      .feedback-submit-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-      .feedback-status-msg {
-        margin-top: 1rem;
-        padding: 0.75rem;
-        border-radius: 8px;
-        font-size: 0.875rem;
-        text-align: center;
-        display: none;
-      }
-      .feedback-status-msg.success {
-        display: block;
-        background: #ecfdf5;
-        color: #059669;
-      }
-      .feedback-status-msg.error {
-        display: block;
-        background: #fef2f2;
-        color: #dc2626;
-      }
+      /* Feedback panel styles removed - read-only mode */
 
       /* Mobile responsive */
       @media (max-width: 768px) {
@@ -1108,27 +827,11 @@
           min-height: 50%;
           border-radius: 12px;
         }
-        .chat-feedback-panel {
-          width: 100%;
-          max-height: 45%;
-          border-radius: 12px;
-        }
-        .chat-feedback-toggle {
-          display: flex;
-        }
       }
       @media (max-width: 640px) {
         .chat-modal-wrapper {
           padding: 0;
           gap: 0.5rem;
-        }
-        .feedback-rating-buttons {
-          justify-content: space-between;
-        }
-        .rating-btn {
-          width: 40px;
-          height: 40px;
-          font-size: 1.25rem;
         }
       }
     </style>
@@ -1138,8 +841,6 @@
         const modal = document.getElementById("chatModal");
         const iframe = document.getElementById("chatIframe");
         const errorDiv = document.getElementById("chatIframeError");
-        const feedbackPanel = document.getElementById("chatFeedbackPanel");
-        const toggleBtn = document.querySelector(".chat-feedback-toggle");
 
         // Build URL with optional query
         let chatUrl = "https://edtech.chatbotsafrica.com/";
@@ -1157,10 +858,6 @@
         // Show modal
         modal.style.display = "flex";
         document.body.style.overflow = "hidden";
-
-        // Auto-open feedback panel alongside chat
-        feedbackPanel.classList.add("open");
-        toggleBtn?.classList.add("active");
 
         // Check if iframe loads (basic error detection)
         iframe.onerror = function () {
@@ -1184,166 +881,11 @@
       function closeChatModal() {
         const modal = document.getElementById("chatModal");
         const iframe = document.getElementById("chatIframe");
-        const feedbackPanel = document.getElementById("chatFeedbackPanel");
 
         modal.style.display = "none";
         iframe.src = ""; // Clear iframe
         document.body.style.overflow = "";
-
-        // Close feedback panel too
-        feedbackPanel.classList.remove("open");
-        document
-          .querySelector(".chat-feedback-toggle")
-          ?.classList.remove("active");
-
-        // Reset feedback form
-        resetFeedbackForm();
       }
-
-      function toggleFeedbackPanel() {
-        const panel = document.getElementById("chatFeedbackPanel");
-        const toggleBtn = document.querySelector(".chat-feedback-toggle");
-
-        panel.classList.toggle("open");
-        toggleBtn?.classList.toggle("active");
-      }
-
-      function resetFeedbackForm() {
-        const form = document.getElementById("chatFeedbackForm");
-        const statusMsg = document.getElementById("chatFeedbackStatus");
-        const ratingInput = document.getElementById("chatFeedbackRating");
-
-        form?.reset();
-        if (ratingInput) ratingInput.value = "";
-        if (statusMsg) {
-          statusMsg.className = "feedback-status-msg";
-          statusMsg.textContent = "";
-        }
-
-        // Clear selected rating buttons
-        document.querySelectorAll(".rating-btn").forEach((btn) => {
-          btn.classList.remove("selected");
-        });
-      }
-
-      // Rating button selection
-      document.querySelectorAll(".rating-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          // Remove selected from all
-          document
-            .querySelectorAll(".rating-btn")
-            .forEach((b) => b.classList.remove("selected"));
-          // Add selected to clicked
-          this.classList.add("selected");
-          // Set hidden input value
-          document.getElementById("chatFeedbackRating").value =
-            this.dataset.rating;
-        });
-      });
-
-      // Feedback form submission
-      document
-        .getElementById("chatFeedbackForm")
-        ?.addEventListener("submit", async function (e) {
-          e.preventDefault();
-
-          const rating = document.getElementById("chatFeedbackRating").value;
-          const comment = document
-            .getElementById("chatFeedbackComment")
-            .value.trim();
-          const submitBtn = document.getElementById("chatFeedbackSubmit");
-          const statusMsg = document.getElementById("chatFeedbackStatus");
-
-          // Require at least rating or comment
-          if (!rating && !comment) {
-            statusMsg.textContent = "Please select a rating or enter feedback.";
-            statusMsg.className = "feedback-status-msg error";
-            return;
-          }
-
-          // Disable button while submitting
-          submitBtn.disabled = true;
-          submitBtn.textContent = "Sending...";
-
-          // Map rating to backend format
-          const ratingMap = {
-            very_satisfied: "very satisfied",
-            satisfied: "satisfied",
-            neutral: "neutral",
-            dissatisfied: "dissatisfied",
-            very_dissatisfied: "very dissatisfied",
-          };
-
-          // Generate device ID
-          let deviceId = localStorage.getItem("edtech-device-id");
-          if (!deviceId) {
-            deviceId =
-              "device_" +
-              Date.now() +
-              "_" +
-              Math.random().toString(36).substring(2, 10);
-            localStorage.setItem("edtech-device-id", deviceId);
-          }
-
-          try {
-            const response = await fetch(
-              "https://edudoc-610o.onrender.com/api/feedback/submit",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  device_id: deviceId,
-                  feedback: comment || "",
-                  rating: rating ? ratingMap[rating] : "neutral",
-                  source: "chatbot",
-                }),
-              },
-            );
-
-            if (response.ok) {
-              statusMsg.textContent = "Thanks for your feedback!";
-              statusMsg.className = "feedback-status-msg success";
-
-              // Reset form after delay
-              setTimeout(() => {
-                resetFeedbackForm();
-              }, 2000);
-            } else {
-              throw new Error("Server error");
-            }
-          } catch (error) {
-            console.error("Feedback submission error:", error);
-            // Save locally as fallback
-            try {
-              const entries = JSON.parse(
-                localStorage.getItem("edtech-feedback-entries") || "[]",
-              );
-              entries.push({
-                id: "fb_" + Date.now(),
-                device_id: deviceId,
-                rating: rating,
-                comment: comment,
-                source: "chatbot",
-                timestamp: new Date().toISOString(),
-                synced: false,
-              });
-              localStorage.setItem(
-                "edtech-feedback-entries",
-                JSON.stringify(entries),
-              );
-            } catch (e) {}
-
-            statusMsg.textContent = "Thanks! Feedback saved.";
-            statusMsg.className = "feedback-status-msg success";
-
-            setTimeout(() => {
-              resetFeedbackForm();
-            }, 2000);
-          }
-
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Send Feedback";
-        });
 
       // Close on escape key
       document.addEventListener("keydown", function (e) {
@@ -1366,6 +908,7 @@
     <section
       class="bg-gray-50 py-12 md:py-16 flex items-center mb-0"
       aria-labelledby="feedback-heading"
+      style="display: none;"
     >
       <style>
         /* Hide image on iPad-sized screens (768px–1024px) */
